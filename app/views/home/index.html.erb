@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TouchRate</title>
+  </head>
+  <body>
+
+
+    <!-- I dont think i need this -->
+    <% def overallData(tiempo, kind) %>
+    <% require 'json' %>
+    <% require 'net/http' %>
+    <% url = 'https://touch-rate.com/o/analytics/dashboard?api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]%>
+    <% resp = Net::HTTP.get_response(URI.parse(url)) %>
+    <% dashboard = JSON.parse(resp.body) %>
+    <%= dashboard[tiempo]["dashboard"][kind]["total"] %>
+    <% end %>
+
+
+
+
+
+
+ <div>
+    <table style="width:100%">
+      <tr>
+        <td>
+          <ul class="list">
+            <li><%= image_tag("building104.png") %></li>
+            <li><% overallData("30days", "total_users") %></li>
+          </ul>
+        </td>
+        <td>
+          <ul class="list">
+            <li><%= image_tag("users6.png") %></li>
+            <li><# overallData("30days", "total_sessions")%></li>
+          </ul>
+        </td>
+        <td>
+          <ul class="list">
+            <li><%= image_tag("shop4.png")%></li>
+            <li><# maxStore %></li>
+            <li></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+    </table>
+ </div>
+    <div id="week" style="height: 250px; width: 1000px;"> </div>
+  </body>
+  <footer
+  <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
+  </footer>
+</html>

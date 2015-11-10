@@ -1,0 +1,11 @@
+ul.list li{
+ display: inline-block;
+}
+
+.credits {
+  display: none;
+}
+
+th, td {
+  padding: 15px;
+}

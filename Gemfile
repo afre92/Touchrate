@@ -7,6 +7,7 @@ gem 'rails', '4.2.3'
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'dotenv-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -28,6 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'figaro'
+ # gem 'nested_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -35,9 +37,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'dotenv-rails'
+  # gem 'dotenv-rails'
   # gem 'capistrano-figaro-yml', '~> 1.0.2'
-
+  # gem 'capistrano', '~> 3.4.0'
+  # gem 'capistrano-rails', '~> 1.1'
+  # gem 'capistrano-passenger'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
