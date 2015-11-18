@@ -5,57 +5,131 @@
     <title>TouchRate</title>
   </head>
   <body>
+    <% require "net/https"%>
+    <% require "uri"%>
+    <% require "json"%>
+    <% require "date"%>
 
 
-    <!-- I dont think i need this -->
-
-    <%require "net/https"%>
-    <%require "uri"%>
-    <%require "json"%>
-
-    <%uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"])%>
-    <%http = Net::HTTP.new(uri.host, uri.port)%>
-    <%http.use_ssl = true%>
-    <%http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
-
-    <%request = Net::HTTP::Get.new(uri.request_uri)%>
-
-    <%resp = http.request(request)%>
-    <%results = JSON.parse(resp.body)%>
-
-    <%= results %>
+    <%def overallData(tiempo, kind)%>
+      <%uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"])%>
+      <%http = Net::HTTP.new(uri.host, uri.port)%>
+      <%http.use_ssl = true%>
+      <%http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
+      <%request = Net::HTTP::Get.new(uri.request_uri)%>
+      <%resp = http.request(request)%>
+      <%results = JSON.parse(resp.body)%>
+      <% results[tiempo]["dashboard"][kind]["total"] %>
+    <% end %>
 
 
+    <% def maxStore(arg1) %>
+      <% arr = [] %>
+      <% uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"])%>
+      <% http = Net::HTTP.new(uri.host, uri.port)%>
+      <% http.use_ssl = true%>
+      <% http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
+      <% request = Net::HTTP::Get.new(uri.request_uri)%>
+      <% resp = http.request(request)%>
+      <% results = JSON.parse(resp.body)%>
+          <% results["aaData"].each do |n| %>
+          <%  arr.push(n["sc"]) %>
+          <% end %>
+          <%= arr.max %><p></p>
+          <% if arg1 == "storeName"%>
+              <% results["aaData"].each do |u| %>
+                <% if u["sc"] == arr.max %>
+                <% storeNumber = u["name"] %>
+                <%= storeNumber %>
+                <%end%>
+              <% end %>
+          <% end %>
+
+    <% end %>
+
+    <%def dayMaxEng %>
+      <%arr = []%>
+      <%uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&period=30days')%>
+      <%http = Net::HTTP.new(uri.host, uri.port)%>
+      <%http.use_ssl = true%>
+      <%http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
+      <%request = Net::HTTP::Get.new(uri.request_uri)%>
+      <% resp = http.request(request)%>
+      <% results = JSON.parse(resp.body)%>
+        <% results.each do |n| %>
+        <% arr.push(n["t"]) %>
+        <% end %>
+      <%= arr.max %><p></p>
+        <% results.each do |n| %>
+          <% if n["t"] == arr.max %>
+          <% maxDate = n["_id"] %>
+          <% d = Date.parse(maxDate) %>
+          <%= d.strftime('%A %d %b') %>
+          <%end%>
+
+          <% end %>
+    <% end %>
 
 
+
+      <% def topCatandSub %>
+      <% require 'jsonpath'%>
+      <% uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event=Categories&segmentation=title&period=30days') %>
+      <% http = Net::HTTP.new(uri.host, uri.port)%>
+      <% http.use_ssl = true%>
+      <% http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
+      <%request = Net::HTTP::Get.new(uri.request_uri)%>
+      <% resp = http.request(request)%>
+      <% results = JSON.parse(resp.body)%>
+      <% data = results["2015"]%>
+      <% title = results["meta"]["title"]%>
+        <% algo = data.slice(*title)%>
+        <% algo2 = algo.sort_by { |k,v| v["c"] } %>
+        <%= algo2[-1][0].gsub("\\n","") %>
+      <% end %>
 
  <div>
     <table style="width:100%">
       <tr>
         <td>
           <ul class="list">
-            <li><%= image_tag("building104.png") %></li>
-            <li><# overallData("30days", "total_users") %></li>
+            <li><%= image_tag("building104.png")%></li>
+            <li><%= overallData("30days", "total_users") %></li>
           </ul>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("users6.png") %></li>
-            <li><# overallData("30days", "total_sessions")%></li>
+            <li><%= overallData("30days", "total_sessions")%></li>
           </ul>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("shop4.png")%></li>
-            <li><# maxStore %></li>
-            <li></li>
+            <li><% maxStore("storeName") %></li>
+            <li><% %></li>
           </ul>
         </td>
       </tr>
       <tr>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
+        <td>
+          <ul class="list">
+            <li><%= image_tag("calendar146.png")%></li>
+            <li><% dayMaxEng %></li>
+        </td>
+        <td>
+          <ul class="list">
+            <li><%= image_tag("hourglass.png")%></li>
+            <li><%= overallData("30days", "avg_time")%></li>
+          </ul>
+        </td>
+        <td>
+          <ul class="list">
+          <li><%= image_tag("hourglass.png")%></li>
+          <li><% topCatandSub %></li>
+          <li></li>
+          <ul>
+        </td>
       </tr>
       <tr>
         <td>3</td>
