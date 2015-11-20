@@ -5,91 +5,11 @@
     <title>TouchRate</title>
   </head>
   <body>
-    <% require "net/https"%>
-    <% require "uri"%>
-    <% require "json"%>
-    <% require "date"%>
 
 
-    <%def overallData(tiempo, kind)%>
-      <%uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"])%>
-      <%http = Net::HTTP.new(uri.host, uri.port)%>
-      <%http.use_ssl = true%>
-      <%http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
-      <%request = Net::HTTP::Get.new(uri.request_uri)%>
-      <%resp = http.request(request)%>
-      <%results = JSON.parse(resp.body)%>
-      <% results[tiempo]["dashboard"][kind]["total"] %>
-    <% end %>
-
-
-    <% def maxStore(arg1) %>
-      <% arr = [] %>
-      <% uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"])%>
-      <% http = Net::HTTP.new(uri.host, uri.port)%>
-      <% http.use_ssl = true%>
-      <% http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
-      <% request = Net::HTTP::Get.new(uri.request_uri)%>
-      <% resp = http.request(request)%>
-      <% results = JSON.parse(resp.body)%>
-          <% results["aaData"].each do |n| %>
-          <%  arr.push(n["sc"]) %>
-          <% end %>
-          <%= arr.max %><p></p>
-          <% if arg1 == "storeName"%>
-              <% results["aaData"].each do |u| %>
-                <% if u["sc"] == arr.max %>
-                <% storeNumber = u["name"] %>
-                <%= storeNumber %>
-                <%end%>
-              <% end %>
-          <% end %>
-
-    <% end %>
-
-    <%def dayMaxEng %>
-      <%arr = []%>
-      <%uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&period=30days')%>
-      <%http = Net::HTTP.new(uri.host, uri.port)%>
-      <%http.use_ssl = true%>
-      <%http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
-      <%request = Net::HTTP::Get.new(uri.request_uri)%>
-      <% resp = http.request(request)%>
-      <% results = JSON.parse(resp.body)%>
-        <% results.each do |n| %>
-        <% arr.push(n["t"]) %>
-        <% end %>
-      <%= arr.max %><p></p>
-        <% results.each do |n| %>
-          <% if n["t"] == arr.max %>
-          <% maxDate = n["_id"] %>
-          <% d = Date.parse(maxDate) %>
-          <%= d.strftime('%A %d %b') %>
-          <%end%>
-
-          <% end %>
-    <% end %>
-
-
-
-      <% def topCatandSub %>
-      <% require 'jsonpath'%>
-      <% uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event=Categories&segmentation=title&period=30days') %>
-      <% http = Net::HTTP.new(uri.host, uri.port)%>
-      <% http.use_ssl = true%>
-      <% http.verify_mode = OpenSSL::SSL::VERIFY_NONE%>
-      <%request = Net::HTTP::Get.new(uri.request_uri)%>
-      <% resp = http.request(request)%>
-      <% results = JSON.parse(resp.body)%>
-      <% data = results["2015"]%>
-      <% title = results["meta"]["title"]%>
-        <% algo = data.slice(*title)%>
-        <% algo2 = algo.sort_by { |k,v| v["c"] } %>
-        <%= algo2[-1][0].gsub("\\n","") %>
-      <% end %>
 
  <div>
-    <table style="width:100%">
+    <table>
       <tr>
         <td>
           <ul class="list">
@@ -106,8 +26,8 @@
         <td>
           <ul class="list">
             <li><%= image_tag("shop4.png")%></li>
-            <li><% maxStore("storeName") %></li>
-            <li><% %></li>
+            <li><%= maxStore("storeName") %></li>
+            <li></li>
           </ul>
         </td>
       </tr>
@@ -115,7 +35,7 @@
         <td>
           <ul class="list">
             <li><%= image_tag("calendar146.png")%></li>
-            <li><% dayMaxEng %></li>
+            <li><%= dayMaxEng %></li>
         </td>
         <td>
           <ul class="list">
@@ -125,21 +45,54 @@
         </td>
         <td>
           <ul class="list">
-          <li><%= image_tag("hourglass.png")%></li>
-          <li><% topCatandSub %></li>
-          <li></li>
+          <li><%= image_tag("active4.png")%></li>
+          <li><%= topCatandSub %></li>
+          <li> </li>
           <ul>
         </td>
       </tr>
       <tr>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
+        <td class="cell">
+          <ul class="list0">
+            <li><%= categories(6)%></li>
+            <li class="icons"><%= image_tag("poker4.png")%></li>
+            <li style="float:right;">%<%= percentCategories(6)%></li>
+          </ul>
+          <ul class="list0">
+            <li><%= categories(5)%></li>
+            <li class="icons"><%= image_tag("kids1.png")%></li>
+            <li style="float:right;">%<%= percentCategories(5)%></li>
+          </ul>
+        </td>
+        <td class="cell">
+          <ul class="list0">
+            <li><%= categories(4)%></li>
+            <li class="icons"><%= image_tag("horse166.png")%></li>
+            <li style="float:right;">%<%= percentCategories(4)%></li>
+          </ul>
+          <ul class="list0">
+            <li><%= categories(3)%></li>
+            <li class="icons"><%= image_tag("kids1.png")%></li>
+            <li style="float:right;">%<%= percentCategories(3)%></li>
+          </ul>
+        </td>
+        <td class="cell">
+          <ul class="list0">
+            <li><%= categories(2)%></li>
+            <li class="icons"><%= image_tag("game118.png")%></li>
+            <li style="float:right;">%<%= percentCategories(2)%></li>
+          </ul>
+          <ul class="list0">
+            <li><%= categories(1)%></li>
+            <li class="icons"><%= image_tag("lego2.png")%></li>
+            <li style="float:right;">%<%= percentCategories(1)%></li>
+          </ul>
+        </td>
       </tr>
     </table>
- </div>
-    <div id="week" style="height: 250px; width: 1000px;"> </div>
-  </body>
+
+
+    <div id="month" style="height: 250px; width: 100%"></div>
   <footer
   <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </footer>
