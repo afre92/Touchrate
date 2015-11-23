@@ -5,8 +5,8 @@ module ApplicationHelper
     require "date"
     require 'jsonpath'
 
-   def topCatandSub
-     uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event=Categories&segmentation=title&period=30days')
+   def topCatandSub(evento)
+     uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event='+evento+'&segmentation=title&period=30days')
      http = Net::HTTP.new(uri.host, uri.port)
      http.use_ssl = true
      http.verify_mode = OpenSSL::SSL::VERIFY_NONE

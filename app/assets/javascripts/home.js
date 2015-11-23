@@ -1,23 +1,4 @@
-function drawChart(results) {
-      new Morris.Line({
-          element: 'month',
-          data: results,
-          xkey: '_id',
-          ykeys: ['t'],
-          labels: ['Engagements'],
-          lineColors: ['#009933'],
-          smooth: false
 
-    })
-};
-
-$.ajax({
-    url: 'https://touch-rate.com/o/analytics/sessions?api_key=d2e962d60f05511be209aafd7b2981f0&app_id=55e9994904161c2504fe29ca&period=30days',
-    dataType: 'jsonp',
-    success: function(results){
-        drawChart(results);
-      }
-  });
 
 
 $(document).ready(function(){
@@ -68,6 +49,28 @@ $(document).ready(function(){
     //     $(".numberOfEngagements").append(value["7days"]["dashboard"]["total_sessions"]["total"])
     //
     //   };
+
+    function drawChart(results) {
+          new Morris.Line({
+              element: 'month',
+              data: results,
+              xkey: '_id',
+              ykeys: ['t'],
+              labels: ['Engagements'],
+              lineColors: ['#009933'],
+              smooth: false
+
+        })
+    };
+
+    $.ajax({
+        url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=30days',
+        dataType: 'jsonp',
+        success: function(results){
+            drawChart(results);
+          }
+      });
+
 
 
 });

@@ -7,9 +7,25 @@
   <body>
 
 
+<%= javascript_tag do %>
+ window.key = "<%= ENV["API_KEY"] %>"
+ window.id = "<%= ENV["APP_ID"] %>"
+<%end%>
+
 
  <div>
     <table>
+      <tr>
+        <td>
+          <div style="float:right;">OVERALL PROGRAM</div>
+        </td>
+        <td>
+
+        </td>
+        <td>
+          <div style="text-align:center;">Engagement Leader </div>
+        </td>
+      </tr>
       <tr>
         <td>
           <ul class="list">
@@ -31,6 +47,23 @@
           </ul>
         </td>
       </tr>
+
+      <tr>
+        <td colspan="3">
+          <div id="month" style="height: 200px; width: 100%"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style="float:right;">TOP HIGHLIGHTS</div>
+        </td>
+        <td>
+        </td>
+
+        <td>
+          <div style="text-align:center;">POPULAR SEARCHES </div>
+        </td>
+      </tr>
       <tr>
         <td>
           <ul class="list">
@@ -46,10 +79,16 @@
         <td>
           <ul class="list">
           <li><%= image_tag("active4.png")%></li>
-          <li><%= topCatandSub %></li>
-          <li> </li>
+          <li><%= topCatandSub("Categories") %></li>
+          <li><%= topCatandSub("Subcategories") %></li>
           <ul>
         </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><div style="text-align:center;"> CATEGORIES RESULTS</div></td>
+        <td></td>
+
       </tr>
       <tr>
         <td class="cell">
@@ -92,7 +131,7 @@
     </table>
 
 
-    <div id="month" style="height: 250px; width: 100%"></div>
+
   <footer
   <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </footer>
