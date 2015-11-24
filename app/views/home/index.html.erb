@@ -16,81 +16,79 @@
  <div>
     <table>
       <tr>
-        <td>
-          <div style="float:right;">OVERALL PROGRAM</div>
+        <td  class="top left-margin" >
+          <div class="top title" style="float:right;">OVERALL PROGRAM</div>
         </td>
-        <td>
+        <td  class="top ">
 
         </td>
-        <td>
-          <div style="text-align:center;">Engagement Leader </div>
+        <td  class="top right-margin">
+          <div class="top title" style="text-align:center;">ENGAGEMENTS LEADER </div>
         </td>
       </tr>
       <tr>
-        <td>
+        <td class="left-margin">
           <ul class="list">
-            <li><%= image_tag("building104.png")%></li>
-            <li><%= overallData("30days", "total_users") %></li>
+            <li><%= image_tag("building.png")%></li>
+            <li class="first results"><%= overallData("30days", "total_users") %><p class="top-description" style="margin-top: 5px;">Toys"R"Us stores <br> actively participating <br> in this program</li>
           </ul>
         </td>
         <td>
           <ul class="list">
-            <li><%= image_tag("users6.png") %></li>
-            <li><%= overallData("30days", "total_sessions")%></li>
+            <li><%= image_tag("group.png") %></li>
+            <li class="first results"><%= overallData("30days", "total_sessions")%><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> Toys"R"Us assortment</li>
           </ul>
         </td>
-        <td>
+        <td class="right-margin">
           <ul class="list">
-            <li><%= image_tag("shop4.png")%></li>
-            <li><%= maxStore("storeName") %></li>
+            <li><%= image_tag("house.png")%></li>
+            <li class="first results"><%= maxStore("storeName") %><p class="top-description">Leading in <br>program Engagements</p></li>
             <li></li>
           </ul>
         </td>
       </tr>
-
       <tr>
-        <td colspan="3">
-          <div id="month" style="height: 200px; width: 100%"></div>
+        <td class="margins" colspan="3">
+          <div id="month" style="height: 160px; width: 100%"></div>
         </td>
       </tr>
-      <tr>
-        <td>
-          <div style="float:right;">TOP HIGHLIGHTS</div>
+      <tr  class="center">
+        <td class="center left-margin">
+          <div  class = "title" style="float:right;">TOP HIGHLIGHTS</div>
         </td>
-        <td>
+        <td style="height:20px;">
         </td>
-
-        <td>
-          <div style="text-align:center;">POPULAR SEARCHES </div>
+        <td class="center right-margin">
+          <div  class = "title" style="text-align:center;">POPULAR SEARCHES </div>
         </td>
       </tr>
-      <tr>
-        <td>
+      <tr  class="center" >
+        <td class="left-margin">
           <ul class="list">
-            <li><%= image_tag("calendar146.png")%></li>
-            <li><%= dayMaxEng %></li>
+            <li><%= image_tag("calendar.png")%></li>
+            <li class="second results"><%= dayMaxEng %><p class="mid-description" style="margin-top: 1px;">Most popular day <br> for Engagements</p></li>
         </td>
         <td>
           <ul class="list">
-            <li><%= image_tag("hourglass.png")%></li>
-            <li><%= overallData("30days", "avg_time")%></li>
+            <li><%= image_tag("time.png")%></li>
+            <li class="second results" ><%= overallData("30days", "avg_time")%><p class="mid-description" style="margin-top: 1px;">Average time spent<br> on application</li>
           </ul>
         </td>
-        <td>
+        <td class="right-margin">
           <ul class="list">
-          <li><%= image_tag("active4.png")%></li>
-          <li><%= topCatandSub("Categories") %></li>
-          <li><%= topCatandSub("Subcategories") %></li>
+          <li><%= image_tag("search.png")%></li>
+          <li class="second results"><%= topCatandSub("Categories") %><p class="mid-description">Most search Category</p></li>
+          <li class="second results"><%= topCatandSub("Subcategories") %><p class="mid-description">Most search Subcategory</p></li>
           <ul>
         </td>
       </tr>
-      <tr>
-        <td></td>
-        <td><div style="text-align:center;"> CATEGORIES RESULTS</div></td>
-        <td></td>
+      <tr class="bottom">
+        <td style="height:20px;"></td>
+        <td style="height:20px;"><div style="text-align:center;"> CATEGORIES RESULTS</div></td>
+        <td style="height:20px;"></td>
 
       </tr>
-      <tr>
+      <tr class="bottom">
         <td class="cell">
           <ul class="list0">
             <li><%= categories(6)%></li>
@@ -130,7 +128,7 @@
       </tr>
     </table>
 
-
+<!-- <img src="/assets/house34.svg" class="casa" alt= "pic" /> -->
 
   <footer
   <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>

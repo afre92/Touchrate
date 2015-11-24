@@ -16,8 +16,9 @@ tr, td {
   width: 35%;
 
 }
-table, tr, th {
-  border: 1px solid black;
+
+td {
+  height: 80px;
 }
 
 table {
@@ -31,4 +32,85 @@ td.cell {
 
 .icons {
   float: left;
+}
+td.top {
+  border-top: 3px solid #02335E;
+  height: 20px;
+
+}
+
+td.left-margin {
+  border-left: 3px solid #02335E;
+}
+
+td.right-margin {
+  border-right: 3px solid #02335E;
+
+}
+
+
+td.margins {
+  border-left: 3px solid #02335E;
+  border-right: 3px solid #02335E;
+}
+
+tr.center {
+    background-color: #02335E;
+
+}
+
+tr.bottom {
+  background-color: #61b3FA;
+}
+
+.casa {
+  background-color: white;
+}
+td.center{
+      height: 20px;
+}
+img {
+  width: 70px;
+  height: 70px;
+}
+
+div.title {
+  color: white;
+  font-size: 22px;
+  font-family: "Verdana", Times, serif;
+
+}
+
+.second.results {
+  color: #6BBFFF;
+  font-size: 15px;
+  font-family: "Verdana", Times, serif;
+
+}
+
+
+.first.results {
+  color:  #02335E;
+  font-size: 22px;
+  font-family: "Verdana", Times, serif;
+
+
+}
+
+
+.top-description{
+  color: black;
+  font-size: 15px;
+}
+
+.top.title {
+  color: black;
+  font-size: 22px;
+  font-family: "Verdana", Times, serif;
+}
+
+
+.mid-description {
+    font-size: 15px;
+    color: white;
 }
