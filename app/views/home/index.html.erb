@@ -11,7 +11,7 @@
  window.key = "<%= ENV["API_KEY"] %>"
  window.id = "<%= ENV["APP_ID"] %>"
 <%end%>
-
+<button class="7days" type="button" >7days</button>
 
  <div>
     <table>
@@ -27,8 +27,8 @@
         </td>
       </tr>
       <tr>
-        <td class="left-margin">
-          <ul class="list">
+        <td class="left-margin bottom">
+          <ul class="list ">
             <li><%= image_tag("building.png")%></li>
             <li class="first results"><%= overallData("30days", "total_users") %><p class="top-description" style="margin-top: 5px;">Toys"R"Us stores <br> actively participating <br> in this program</li>
           </ul>
@@ -39,11 +39,10 @@
             <li class="first results"><%= overallData("30days", "total_sessions")%><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> Toys"R"Us assortment</li>
           </ul>
         </td>
-        <td class="right-margin">
+        <td class="right-margin bottom">
           <ul class="list">
             <li><%= image_tag("house.png")%></li>
             <li class="first results"><%= maxStore("storeName") %><p class="top-description">Leading in <br>program Engagements</p></li>
-            <li></li>
           </ul>
         </td>
       </tr>
@@ -59,78 +58,72 @@
         <td style="height:20px;">
         </td>
         <td class="center right-margin">
-          <div  class = "title" style="text-align:center;">POPULAR SEARCHES </div>
+          <div  class = "title" style="text-align:center;">PREFERRED COMMUNICATION</div>
         </td>
       </tr>
       <tr  class="center" >
         <td class="left-margin">
           <ul class="list">
             <li><%= image_tag("calendar.png")%></li>
-            <li class="second results"><%= dayMaxEng %><p class="mid-description" style="margin-top: 1px;">Most popular day <br> for Engagements</p></li>
+            <li class="second results"><%= popularDay %><p class="mid-description">Most popular day <br> for Engagements</p></li>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("time.png")%></li>
-            <li class="second results" ><%= overallData("30days", "avg_time")%><p class="mid-description" style="margin-top: 1px;">Average time spent<br> on application</li>
+            <li class="second results" ><%= overallData("30days", "avg_time")%><p class="mid-description">Average time spent<br> on application</li>
           </ul>
         </td>
         <td class="right-margin">
           <ul class="list">
-          <li><%= image_tag("search.png")%></li>
-          <li class="second results"><%= topCatandSub("Categories") %><p class="mid-description">Most search Category</p></li>
-          <li class="second results"><%= topCatandSub("Subcategories") %><p class="mid-description">Most search Subcategory</p></li>
-          <ul>
+          <li style="text-align:center; font-size: 25px;" class="second results"><%= communication("phone") %><p class="mid-description">Text messages</p></li>
+          <li><%= image_tag("businessmen22.png")%></li>
+          <li style="text-align:center; font-size: 25px;" class="second results"><%= communication("email") %><p class="mid-description">Emails</p></li>
+        </ul>
         </td>
       </tr>
       <tr class="bottom">
-        <td style="height:20px;"></td>
-        <td style="height:20px;"><div style="text-align:center;"> CATEGORIES RESULTS</div></td>
-        <td style="height:20px;"></td>
-
+        <td class="left-margin bottom-title" style="height:20px;"><div style="text-align:center;">TOP CATEGORIES</div></td>
+        <td class="bottom-title" style="height:20px;"><div style="text-align:center;">TOP SUBCATEGORIES</div></td>
+        <td class="right-margin bottom-title"style="height:20px;"><div style="text-align:center;">TOP PRODUCTS</div></td>
       </tr>
       <tr class="bottom">
-        <td class="cell">
-          <ul class="list0">
-            <li><%= categories(6)%></li>
-            <li class="icons"><%= image_tag("poker4.png")%></li>
-            <li style="float:right;">%<%= percentCategories(6)%></li>
+        <td class="left-margin bottom-margin">
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><%= categories(-1) %></li>
           </ul>
-          <ul class="list0">
-            <li><%= categories(5)%></li>
-            <li class="icons"><%= image_tag("kids1.png")%></li>
-            <li style="float:right;">%<%= percentCategories(5)%></li>
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><%= categories(-2) %></li>
           </ul>
-        </td>
-        <td class="cell">
-          <ul class="list0">
-            <li><%= categories(4)%></li>
-            <li class="icons"><%= image_tag("horse166.png")%></li>
-            <li style="float:right;">%<%= percentCategories(4)%></li>
-          </ul>
-          <ul class="list0">
-            <li><%= categories(3)%></li>
-            <li class="icons"><%= image_tag("kids1.png")%></li>
-            <li style="float:right;">%<%= percentCategories(3)%></li>
+          <ul style="padding-bottom: 20px;" class="list bottom-numbers">
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><%= categories(-3) %></li>
           </ul>
         </td>
-        <td class="cell">
-          <ul class="list0">
-            <li><%= categories(2)%></li>
-            <li class="icons"><%= image_tag("game118.png")%></li>
-            <li style="float:right;">%<%= percentCategories(2)%></li>
+        <td class="bottom bottom-margin">
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><%= subCategories(-1) %></li>
           </ul>
-          <ul class="list0">
-            <li><%= categories(1)%></li>
-            <li class="icons"><%= image_tag("lego2.png")%></li>
-            <li style="float:right;">%<%= percentCategories(1)%></li>
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><%= subCategories(-2) %></li>
+          </ul>
+          <ul style="padding-bottom: 20px;" class="list bottom-numbers">
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><%= subCategories(-3) %></li>
+          </ul>
+        </td>
+        <td class="right-margin bottom-margin">
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><%= products(-1) %></li>
+          </ul>
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><%= products(-2) %></li>
+          </ul>
+          <ul style="padding-bottom: 20px;" class="list bottom-numbers">
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><%= products(-3) %></li>
           </ul>
         </td>
       </tr>
     </table>
-
 <!-- <img src="/assets/house34.svg" class="casa" alt= "pic" /> -->
-
-  <footer
+  <footer>
   <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </footer>
 </html>

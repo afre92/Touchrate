@@ -5,21 +5,8 @@ module ApplicationHelper
     require "date"
     require 'jsonpath'
 
-   def topCatandSub(evento)
-     uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event='+evento+'&segmentation=title&period=30days')
-     http = Net::HTTP.new(uri.host, uri.port)
-     http.use_ssl = true
-     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-     request = Net::HTTP::Get.new(uri.request_uri)
-     resp = http.request(request)
-     results = JSON.parse(resp.body)
-     data = results["2015"]
-     title = results["meta"]["title"]
-     algo = data.slice(*title)
-     algo2 = algo.sort_by { |k,v| v["c"] }
-     algo2[-1][0].gsub("\\n"," ").gsub("Games"," ")
 
-   end
+
 
 
    def overallData(tiempo, kind)
@@ -75,9 +62,25 @@ module ApplicationHelper
            if n["t"] == arr.max
              maxDate = n["_id"]
              d = Date.parse(maxDate)
-             return d.strftime('%A')
+             return d.strftime('%A %b %d')
           end
         end
+
+     end
+
+     def getEvents(event, segmentation)
+       uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event='+event+'&segmentation='+segmentation+'&period=30days')
+       http = Net::HTTP.new(uri.host, uri.port)
+       http.use_ssl = true
+       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+       request = Net::HTTP::Get.new(uri.request_uri)
+       resp = http.request(request)
+       results = JSON.parse(resp.body)
+       data = results["2015"]
+       title = results["meta"]["title"]
+       algo = data.slice(*title)
+       algo2 = algo.sort_by { |k,v| v["c"] }
+       algo2[-1][0].gsub("\\n"," ").gsub("Games"," ")
 
      end
 
@@ -94,10 +97,52 @@ module ApplicationHelper
          data = results["2015"]
          title = results["meta"]["title"]
          algo = data.slice(*title).to_a
-           if algo[int] == nil
+         algo2 = algo.sort_by { |k,v| v["c"] }
+           if algo2[int] == nil
              return "No Data"
            else
-             return  vow = algo[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
+             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
+           end
+      end
+      def subCategories(int)
+         vow = nil
+         arr = []
+         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event=Subcategories&segmentation=title&period=30days')
+         http = Net::HTTP.new(uri.host, uri.port)
+         http.use_ssl = true
+         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+         request = Net::HTTP::Get.new(uri.request_uri)
+         resp = http.request(request)
+         results = JSON.parse(resp.body)
+         data = results["2015"]
+         title = results["meta"]["title"]
+         algo = data.slice(*title).to_a
+         algo2 = algo.sort_by { |k,v| v["c"] }
+           if algo2[int] == nil
+             return "No Data"
+           else
+             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
+           end
+      end
+
+      def products(int)
+         vow = nil
+         arr = []
+         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event=Products&segmentation=title&period=30days')
+         http = Net::HTTP.new(uri.host, uri.port)
+         http.use_ssl = true
+         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+         request = Net::HTTP::Get.new(uri.request_uri)
+         resp = http.request(request)
+         results = JSON.parse(resp.body)
+         data = results["2015"]
+         title = results["meta"]["title"]
+         algo = data.slice(*title).to_a
+         algo2 = algo.sort_by { |k,v| v["c"] }
+           if algo2[int] == nil
+             return "No Data"
+           else
+             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
            end
       end
 
@@ -122,6 +167,67 @@ module ApplicationHelper
                 end
               return algo[int][1]["c"]*100 / arr.sum
             end
+        end
+
+        def popularDay
+          week = [0, 0, 0, 0, 0, 0, 0]
+          d = nil
+          uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&period=30days')
+          http = Net::HTTP.new(uri.host, uri.port)
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          request = Net::HTTP::Get.new(uri.request_uri)
+          resp = http.request(request)
+          results = JSON.parse(resp.body)
+          results.each do |n|
+            maxDate = n["_id"]
+            d = Date.parse(maxDate)
+              if d.strftime('%A') == "Monday"
+                week[0] += n["t"]
+              elsif d.strftime('%A') == "Tuesday"
+                week[1] += n["t"]
+              elsif d.strftime('%A') == "Wednesday"
+                week[2] += n["t"]
+              elsif d.strftime('%A') == "Thursday"
+                week[3] += n["t"]
+              elsif d.strftime('%A') == "Friday"
+                week[4] += n["t"]
+              elsif d.strftime('%A') == "Saturday"
+                week[5] += n["t"]
+              else
+                week[6] += n["t"]
+              end
+            end
+          maxIndex = week.index(week.max)
+          if maxIndex == 0
+            return "Monday"
+          elsif maxIndex == 1
+            return "Tuesday"
+          elsif maxIndex == 2
+            return "Wednesday"
+          elsif maxIndex == 3
+            return "Thursday"
+          elsif maxIndex == 4
+            return "Friday"
+          elsif maxIndex == 5
+            return "Saturday"
+          elsif maxIndex == 6
+            return "Sunday"
+          end
+        end
+
+
+
+        def communication(meta)
+          uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+ENV["API_KEY"]+'&app_id='+ENV["APP_ID"]+'&event=Contact Info&period=30days')
+          http = Net::HTTP.new(uri.host, uri.port)
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          request = Net::HTTP::Get.new(uri.request_uri)
+          resp = http.request(request)
+          results = JSON.parse(resp.body)
+          data = results["2015"]
+          title = results["meta"][meta].length
         end
 
 
