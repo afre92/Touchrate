@@ -8,8 +8,8 @@
 
 
 <%= javascript_tag do %>
- window.key = "<%= ENV["API_KEY"] %>"
- window.id = "<%= ENV["APP_ID"] %>"
+ window.key = "<%= current_user.api_key %>"
+ window.id = "<%= current_user.app_id %>"
 <%end%>
 <button class="7days" type="button" >7days</button>
 
@@ -30,13 +30,13 @@
         <td class="left-margin bottom">
           <ul class="list ">
             <li><%= image_tag("building.png")%></li>
-            <li class="first results"><%= overallData("30days", "total_users") %><p class="top-description" style="margin-top: 5px;">Toys"R"Us stores <br> actively participating <br> in this program</li>
+            <li class="first results"><%= overallData("30days", "total_users") %><p class="top-description" style="margin-top: 5px;"><%= current_user.name %> stores <br> actively participating <br> in this program</li>
           </ul>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("group.png") %></li>
-            <li class="first results"><%= overallData("30days", "total_sessions")%><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> Toys"R"Us assortment</li>
+            <li class="first results"><%= overallData("30days", "total_sessions")%><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> <%= current_user.name %> assortment</li>
           </ul>
         </td>
         <td class="right-margin bottom">
@@ -122,6 +122,8 @@
         </td>
       </tr>
     </table>
+
+    <button class="button" id="7days" data-localize="commom.7days">7 days</buttom>
 <!-- <img src="/assets/house34.svg" class="casa" alt= "pic" /> -->
   <footer>
   <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>

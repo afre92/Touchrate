@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-
+before_action :require_user, only: [:index, :show]
     # def overallData(tiempo, kind)
     #   require 'json'
     #   require 'net/http'
