@@ -4,6 +4,13 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # def index
+  #   @users = User.all
+  # end
+
+  def show
+    @user = User.where(app_id: params[:app_id])
+  end
 
   def create
     @user = User.new(user_params)

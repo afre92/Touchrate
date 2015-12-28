@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/assets/jquery-ui.css">
+  <link rel="stylesheet" href="/assets/jquery-ui-1.9.2.custom.min.css">
+   <meta charset="utf-8">
     <title>TouchRate</title>
   </head>
   <body>
+
+
+<!-- <input type="text" id="user" />
+<input type="text" id="pass" />
+<button onclick="submit();" href="javascript:;">Submit</button> -->
+
 
 
 <%= javascript_tag do %>
  window.key = "<%= current_user.api_key %>"
  window.id = "<%= current_user.app_id %>"
 <%end%>
-<button class="7days" type="button" >7days</button>
+
+<ul class="middle-logo">
+  <li><%= image_tag("icon.png") %></li>
+  <li><p class="touchrate">Touchrate</p></li>
+</ul>
+
+
+<input name="savedataoriginale" id="from" type="text">
+<input name="savedataoriginale" id="to" type="text">
+
+
+
+
+<p style="float: left; font-weight:700">PERIOD: &nbsp</p><p class="time-period"><%= timePeriod %></p>
+<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="7days rng" type="button" >7 days</button>
+<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="30days rng" type="button" >30 days</button>
+<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="calendar rng"type="button" disable="disable" name="button"><i class="fa fa-calendar"></i></button>
+<!-- <form>
+  From:<br>
+  <input class="from" type="text" name="firstname">
+  <br>
+  To:<br>
+  <input type="text" name="lastname">
+</form> -->
 
  <div>
     <table>
@@ -30,19 +64,19 @@
         <td class="left-margin bottom">
           <ul class="list ">
             <li><%= image_tag("building.png")%></li>
-            <li class="first results"><%= overallData("30days", "total_users") %><p class="top-description" style="margin-top: 5px;"><%= current_user.name %> stores <br> actively participating <br> in this program</li>
+            <li class="first results"><p class="results1"><%= overallData("30days", "total_users") %></p><p class="top-description" style="margin-top: 5px;"><%= current_user.name %> stores <br> actively participating <br> in this program</li>
           </ul>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("group.png") %></li>
-            <li class="first results"><%= overallData("30days", "total_sessions")%><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> <%= current_user.name %> assortment</li>
+            <li class="first results"><p class="results2"><%= overallData("30days", "total_sessions")%></p><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> <%= current_user.name %> assortment</li>
           </ul>
         </td>
         <td class="right-margin bottom">
           <ul class="list">
             <li><%= image_tag("house.png")%></li>
-            <li class="first results"><%= maxStore("storeName") %><p class="top-description">Leading in <br>program Engagements</p></li>
+            <li class="first results"><p class="results3"><%= maxStore("storeName") %></p><p class="top-description">Leading in <br>program Engagements</p></li>
           </ul>
         </td>
       </tr>
@@ -65,19 +99,19 @@
         <td class="left-margin">
           <ul class="list">
             <li><%= image_tag("calendar.png")%></li>
-            <li class="second results"><%= popularDay %><p class="mid-description">Most popular day <br> for Engagements</p></li>
+            <li class="second results"><p class="results4 md"><%= popularDay %></p><p class="mid-description">Most popular day <br> for Engagements</p></li>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("time.png")%></li>
-            <li class="second results" ><%= overallData("30days", "avg_time")%><p class="mid-description">Average time spent<br> on application</li>
+            <li class="second results" ><p class="results5 md"><%= overallData("30days", "avg_time")%></p><p class="mid-description">Average time spent<br> on application</li>
           </ul>
         </td>
         <td class="right-margin">
           <ul class="list">
-          <li style="text-align:center; font-size: 25px;" class="second results"><%= communication("phone") %><p class="mid-description">Text messages</p></li>
-          <li><%= image_tag("businessmen22.png")%></li>
-          <li style="text-align:center; font-size: 25px;" class="second results"><%= communication("email") %><p class="mid-description">Emails</p></li>
+          <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("phone") %></p><p class="mid-description">Text messages</p></li>
+          <li><%= image_tag("businessmen22.png", :class => 'comm')%></li>
+          <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("email") %></p><p class="mid-description">Emails</p></li>
         </ul>
         </td>
       </tr>
@@ -89,41 +123,41 @@
       <tr class="bottom">
         <td class="left-margin bottom-margin">
           <ul class="list bottom-numbers">
-            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><%= categories(-1) %></li>
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results7-1 bt"><%= categories(-1) %></p></li>
           </ul>
           <ul class="list bottom-numbers">
-            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><%= categories(-2) %></li>
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results7-2 bt"><%= categories(-2) %></p></li>
           </ul>
           <ul style="padding-bottom: 20px;" class="list bottom-numbers">
-            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><%= categories(-3) %></li>
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results7-3 bt"><%= categories(-3) %></p></li>
           </ul>
         </td>
         <td class="bottom bottom-margin">
           <ul class="list bottom-numbers">
-            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><%= subCategories(-1) %></li>
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results8-1 bt"><%= subCategories(-1) %></p></li>
           </ul>
           <ul class="list bottom-numbers">
-            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><%= subCategories(-2) %></li>
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results8-2 bt"><%= subCategories(-2) %></p></li>
           </ul>
           <ul style="padding-bottom: 20px;" class="list bottom-numbers">
-            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><%= subCategories(-3) %></li>
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results8-3 bt"><%= subCategories(-3) %></p></li>
           </ul>
         </td>
         <td class="right-margin bottom-margin">
           <ul class="list bottom-numbers">
-            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><%= products(-1) %></li>
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results9-1 bt"><%= products(-1) %></p></li>
           </ul>
           <ul class="list bottom-numbers">
-            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><%= products(-2) %></li>
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results9-2 bt"><%= products(-2) %></p></li>
           </ul>
           <ul style="padding-bottom: 20px;" class="list bottom-numbers">
-            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><%= products(-3) %></li>
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results9-3 bt"><%= products(-3) %></p></li>
           </ul>
         </td>
       </tr>
     </table>
 
-    <button class="button" id="7days" data-localize="commom.7days">7 days</buttom>
+    <!-- <button class="button" id="7days" data-localize="commom.7days">7 days</buttom> -->
 <!-- <img src="/assets/house34.svg" class="casa" alt= "pic" /> -->
   <footer>
   <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>

@@ -1,0 +1,11 @@
+<!-- <h1> this is users show </h1> -->
+
+<h1>All users</h1>
+
+<ul class="users">
+  <% @user.each do |user| %>
+    <li>
+       <p> <%= user.name %></p>,<p><%= user.app_id %> </p>
+    </li>
+  <% end %>
+</ul>

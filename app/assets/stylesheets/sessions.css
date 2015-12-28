@@ -1,0 +1,57 @@
+/*// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/*/
+body.loginbody {
+  background-color: #1a1a1a;
+}
+
+
+.logo {
+  width: 250px;
+  height: 80px;
+}
+
+.login {
+  padding-top: 180px;
+}
+
+
+.btn-submit {
+  background: #ffb719;
+  background-image: -webkit-linear-gradient(top, #ffb719, #c87100);
+  background-image: -moz-linear-gradient(top, #ffb719, #c87100);
+  background-image: -ms-linear-gradient(top, #ffb719, #c87100);
+  background-image: -o-linear-gradient(top, #ffb719, #c87100);
+  background-image: linear-gradient(to bottom, #ffb719, #c87100);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 6px 30px 6px 30px;
+  text-decoration: none;
+  border: none;
+}
+
+
+
+.inp.btn input{
+  border-radius: 5px;
+}
+
+.inp.btn.up{
+padding-bottom: 10px;
+padding-top: 30px;
+border-radius: 5px;
+}
+
+
+.inp.btn.dn {
+padding-bottom: 15px;
+border-radius: 5px;
+}
+#session_name, #session_password {
+  width: 150px;
+  height: 20px;
+}

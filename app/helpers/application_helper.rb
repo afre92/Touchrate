@@ -101,7 +101,7 @@ module ApplicationHelper
            if algo2[int] == nil
              return "No Data"
            else
-             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
+               vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
            end
       end
       def subCategories(int)
@@ -121,7 +121,7 @@ module ApplicationHelper
            if algo2[int] == nil
              return "No Data"
            else
-             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
+             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ").gsub("Games", "")
            end
       end
 
@@ -231,6 +231,15 @@ module ApplicationHelper
         end
 
 
-
+        def timePeriod
+          uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+current_user.api_key+'&app_id='+current_user.app_id)
+          http = Net::HTTP.new(uri.host, uri.port)
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          request = Net::HTTP::Get.new(uri.request_uri)
+          resp = http.request(request)
+          results = JSON.parse(resp.body)
+          results["30days"]["period"]
+        end
 
 end

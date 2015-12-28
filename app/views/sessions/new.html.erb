@@ -1,7 +1,14 @@
-<h1>session</h1>
+<!-- <h1>session</h1> -->
+<body class="loginbody">
 
+<ul class="login" style="text-align: center;">
 <%= form_for(:session, url: login_path) do |f| %>
-  <%= f.text_field :name, :placeholder => "Name" %>
-  <%= f.password_field :password, :placeholder => "Password" %>
-  <%= f.submit "Log in", class: "btn-submit" %>
+  <li><%= image_tag("unnamed.png", :class => 'logo')%></li>
+  <li class="inp btn up"><%= f.text_field :name, :placeholder => "Name" %></li>
+  <li class="inp btn dn"><%= f.password_field :password, :placeholder => "Password" %></li>
+  <li><%= f.submit "Log in", class: "btn-submit" %></li>
 <% end %>
+</ul>
+
+
+</body>

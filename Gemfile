@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -27,9 +28,13 @@ gem 'jsonpath', '~> 0.5.8'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # Use Unicorn as the app server
+# gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 # gem 'figaro'
  # gem 'nested_form'
-
+# group :assets do
+#   gem 'jquery-ui-rails'
+# end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

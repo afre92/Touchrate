@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <!-- <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon"> -->
+  <!-- <link rel="icon" href="/public/favicon.ico" type="image/x-icon"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <title>Touchrate</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 <% if current_user %>
   <ul>
-    <li><%= current_user.name %></li>
+    <!-- <li><# current_user.name %></li> -->
     <li><%= link_to "Log out", logout_path, method: "delete" %></li>
   </ul>
 <% else %>
   <ul>
-    <li><%= link_to "Login", 'login' %></a></li>
-    <li><%= link_to "Signup", 'signup' %></a></li>
+    <!-- <li><%# link_to "Login", 'login' %></a></li> -->
+    <!-- <li><# link_to "Signup", 'signup' %></a></li> -->
   </ul>
 <% end %>
 
