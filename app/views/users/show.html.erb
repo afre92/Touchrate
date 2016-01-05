@@ -1,6 +1,6 @@
 <!-- <h1> this is users show </h1> -->
 
-<h1>All users</h1>
+
 
 <ul class="users">
   <% @user.each do |user| %>
@@ -9,3 +9,178 @@
     </li>
   <% end %>
 </ul>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/assets/jquery-ui.css">
+  <link rel="stylesheet" href="/assets/jquery-ui-1.9.2.custom.min.css">
+   <meta charset="utf-8">
+    <title>TouchRate</title>
+  </head>
+  <body>
+
+
+<!-- <input type="text" id="useto>
+<input type="text" id="pass" />
+<button onclick="submit();" href="javascript:;">Submit</button> -->
+
+<% @user.each do |user| %>
+
+  <%= javascript_tag do %>
+   window.key = "<%= user.api_key %>"
+   window.id = "<%= user.app_id %>"
+   window.serfrom = "<%= getDateRange("from") %>"
+   window.serto = "<%= getDateRange("to")%>"
+  <%end%>
+<% end %>
+
+<ul class="middle-logo">
+  <li><%= image_tag("icon.png") %></li>
+  <li><p class="touchrate">Touchrate</p></li>
+</ul>
+
+<p><%= getDateRange("from") %></p>
+
+
+<input name="savedataoriginale" id="from" type="text">
+<input name="savedataoriginale" id="to" type="text">
+
+
+
+<% @user.each do |user| %>
+
+<p style="float: left; font-weight:700">PERIOD: &nbsp</p><p class="time-period"><%= timePeriod(user.api_key, user.app_id )%></p>
+<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="7days rng" type="button" >7 days</button>
+<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="30days rng" type="button" >30 days</button>
+<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="calendar rng"type="button" disable="disable" name="button"><i class="fa fa-calendar"></i></button>
+<!-- <form>
+  From:<br>
+  <input class="from" type="text" name="firstname">
+  <br>
+  To:<br>
+  <input type="text" name="lastname">
+</form> -->
+
+ <div>
+    <table>
+      <tr>
+        <td  class="top left-margin" >
+          <div class="top title" style="float:right;">OVERALL PROGRAM</div>
+        </td>
+        <td  class="top ">
+
+        </td>
+        <td  class="top right-margin">
+          <div class="top title" style="text-align:center;">ENGAGEMENTS LEADER </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="left-margin bottom">
+          <ul class="list ">
+            <li><%= image_tag("building.png")%></li>
+            <li class="first results"><p class="results1"><%= overallData("30days", "total_users", user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;"><%= user.name %> stores <br> actively participating <br> in this program</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="list">
+            <li><%= image_tag("group.png") %></li>
+            <li class="first results"><p class="results2"><%= totalSessions(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> <%= user.name %> assortment</li>
+          </ul>
+        </td>
+        <td class="right-margin bottom">
+          <ul class="list">
+            <li><%= image_tag("house.png")%></li>
+            <li class="first results"><p class="results3"><%= maxStore("storeName", user.api_key, user.app_id) %></p><p class="top-description">Leading in <br>program Engagements</p></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="margins" colspan="3">
+          <div id="month" style="height: 160px; width: 100%"></div>
+        </td>
+      </tr>
+      <tr  class="center">
+        <td class="center left-margin">
+          <div  class = "title" style="float:right;">TOP HIGHLIGHTS</div>
+        </td>
+        <td style="height:20px;">
+        </td>
+        <td class="center right-margin">
+          <div  class = "title" style="text-align:center;">PREFERRED COMMUNICATION</div>
+        </td>
+      </tr>
+      <tr  class="center" >
+        <td class="left-margin">
+          <ul class="list">
+            <li><%= image_tag("calendar.png")%></li>
+            <li class="second results"><p class="results4 md"><%= popularDay(user.api_key, user.app_id) %></p><p class="mid-description">Most popular day <br> for Engagements</p></li>
+        </td>
+        <td>
+          <ul class="list">
+            <li><%= image_tag("time.png")%></li>
+            <li class="second results" ><p class="results5 md"><%= overallData("30days", "avg_time", user.api_key, user.app_id)%></p><p class="mid-description">Average time spent<br> on application</li>
+          </ul>
+        </td>
+        <td class="right-margin">
+          <ul class="list">
+          <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("phone", user.api_key, user.app_id) %></p><p class="mid-description">Text messages</p></li>
+          <li><%= image_tag("businessmen22.png", :class => 'comm')%></li>
+          <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("email", user.api_key, user.app_id) %></p><p class="mid-description">Emails</p></li>
+        </ul>
+        </td>
+      </tr>
+      <tr class="bottom">
+        <td class="left-margin bottom-title" style="height:20px;"><div style="text-align:center;">TOP CATEGORIES</div></td>
+        <td class="bottom-title" style="height:20px;"><div style="text-align:center;">TOP SUBCATEGORIES</div></td>
+        <td class="right-margin bottom-title"style="height:20px;"><div style="text-align:center;">TOP PRODUCTS</div></td>
+      </tr>
+      <tr class="bottom">
+        <td class="left-margin bottom-margin">
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results7-1 bt"><%= categories(-1, user.api_key, user.app_id) %></p></li>
+          </ul>
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results7-2 bt"><%= categories(-2, user.api_key, user.app_id)%></p></li>
+          </ul>
+          <ul style="padding-bottom: 20px;" class="list bottom-numbers">
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results7-3 bt"><%= categories(-3, user.api_key, user.app_id) %></p></li>
+          </ul>
+        </td>
+        <td class="bottom bottom-margin">
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results8-1 bt"><%= subCategories(-1, user.api_key, user.app_id) %></p></li>
+          </ul>
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results8-2 bt"><%= subCategories(-2, user.api_key, user.app_id) %></p></li>
+          </ul>
+          <ul style="padding-bottom: 20px;" class="list bottom-numbers">
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results8-3 bt"><%= subCategories(-3, user.api_key, user.app_id) %></p></li>
+          </ul>
+        </td>
+        <td class="right-margin bottom-margin">
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number41.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results9-1 bt"><%= products(-1, user.api_key, user.app_id) %></p></li>
+          </ul>
+          <ul class="list bottom-numbers">
+            <li><%= image_tag("number40.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results9-2 bt"><%= products(-2, user.api_key, user.app_id) %></p></li>
+          </ul>
+          <ul style="padding-bottom: 20px;" class="list bottom-numbers">
+            <li><%= image_tag("number37.png", :class => 'numbers')%></li><li class="bottom-results"><p class="results9-3 bt"><%= products(-3, user.api_key, user.app_id) %></p></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+       <% end %> <!-- end of  users.each -->
+
+    <!-- <button class="button" id="7days" data-localize="commom.7days">7 days</buttom> -->
+<!-- <img src="/assets/house34.svg" class="casa" alt= "pic" /> -->
+  <footer>
+  <div class="credits">Icons made by <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a>, <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/balraj-chana" title="Balraj Chana">Balraj Chana</a>, <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
+  </footer>
+</html>

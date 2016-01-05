@@ -132,11 +132,6 @@ $(document).ready(function(){
   }
 
 
-  // function communication(data){
-      // var results = data["2015"]
-      // console.log(data["2015"])
-      //  $(".results6").append(results["meta"][meta].length)
-  // }
   function allCategories(obj, int, pos){
     var keys = obj["meta"]["title"];
     var newObj = [];
@@ -219,7 +214,7 @@ $(document).ready(function(){
   }
 
     $.ajax({
-        url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=30days',
+        url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=['+serfrom+','+serto+']',
         dataType: 'jsonp',
         success: function(results){
             drawChart(results)

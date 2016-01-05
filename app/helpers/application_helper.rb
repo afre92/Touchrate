@@ -6,11 +6,38 @@ module ApplicationHelper
     require 'jsonpath'
 
 
+   def getDateRange(arg)
+     url = request.original_url
+     uri = URI.parse(url)
+     params = CGI.parse(uri.query)
+     if arg == "from"
+       fromm = params['from'].first
+       return fromm
+     else
+       to = params['to'].first
+       return to
+     end
+   end
+
+   def totalSessions(api_key, app_id)
+     t = 0
+     uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+api_key+'&app_id='+app_id+'&period=['+getDateRange('from')+','+getDateRange('to')+']')
+     http = Net::HTTP.new(uri.host, uri.port)
+     http.use_ssl = true
+     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+     request = Net::HTTP::Get.new(uri.request_uri)
+     resp = http.request(request)
+     results = JSON.parse(resp.body)
+     results.each do |n|
+       t += n["t"]
+     end
+     return t
+   end
 
 
 
-   def overallData(tiempo, kind)
-      uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+current_user.api_key+'&app_id='+current_user.app_id)
+   def overallData(tiempo, kind, api_key, app_id)
+      uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+api_key+'&app_id='+app_id)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -21,10 +48,10 @@ module ApplicationHelper
    end
 
 
-     def maxStore(arg1)
+     def maxStore(arg1, api_key, app_id)
        storeName = nil
        arr = []
-       uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+current_user.api_key+'&app_id='+current_user.app_id)
+       uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id)
        http = Net::HTTP.new(uri.host, uri.port)
        http.use_ssl = true
        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -44,10 +71,10 @@ module ApplicationHelper
            end
       end
 
-    def dayMaxEng
+    def dayMaxEng(api_key, app_id)
       d = nil
       arr = []
-      uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&period=30days')
+      uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+api_key+'&app_id='+app_id+'&period=['+getDateRange("from")+','+getDateRange("to")+']')
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -68,8 +95,8 @@ module ApplicationHelper
 
      end
 
-     def getEvents(event, segmentation)
-       uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&event='+event+'&segmentation='+segmentation+'&period=30days')
+     def getEvents(event, segmentation, api_key, app_id)
+       uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+api_key+'&app_id='+app_id+'&event='+event+'&segmentation='+segmentation+'&period=30days')
        http = Net::HTTP.new(uri.host, uri.port)
        http.use_ssl = true
        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -84,10 +111,10 @@ module ApplicationHelper
 
      end
 
-      def categories(int)
+      def categories(int, api_key, app_id)
          vow = nil
          arr = []
-         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&event=Categories&segmentation=title&period=30days')
+         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+api_key+'&app_id='+app_id+'&event=Categories&segmentation=title&period=30days')
          http = Net::HTTP.new(uri.host, uri.port)
          http.use_ssl = true
          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -104,10 +131,10 @@ module ApplicationHelper
                vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
            end
       end
-      def subCategories(int)
+      def subCategories(int, api_key, app_id)
          vow = nil
          arr = []
-         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&event=Subcategories&segmentation=title&period=30days')
+         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+api_key+'&app_id='+app_id+'&event=Subcategories&segmentation=title&period=30days')
          http = Net::HTTP.new(uri.host, uri.port)
          http.use_ssl = true
          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -125,10 +152,10 @@ module ApplicationHelper
            end
       end
 
-      def products(int)
+      def products(int, api_key, app_id)
          vow = nil
          arr = []
-         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&event=Products&segmentation=title&period=30days')
+         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+api_key+'&app_id='+app_id+'&event=Products&segmentation=title&period=30days')
          http = Net::HTTP.new(uri.host, uri.port)
          http.use_ssl = true
          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -148,7 +175,7 @@ module ApplicationHelper
 
         def percentCategories(int)
          arr = []
-         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&event=Categories&segmentation=title&period=30days')
+         uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+user.api_key+'&app_id='+user.app_id+'&event=Categories&segmentation=title&period=30days')
          http = Net::HTTP.new(uri.host, uri.port)
          http.use_ssl = true
          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -169,10 +196,10 @@ module ApplicationHelper
             end
         end
 
-        def popularDay
+        def popularDay(api_key, app_id)
           week = [0, 0, 0, 0, 0, 0, 0]
           d = nil
-          uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&period=30days')
+          uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+api_key+'&app_id='+app_id+'&period=30days')
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = true
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -218,21 +245,21 @@ module ApplicationHelper
 
 
 
-        def communication(meta)
-          uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+current_user.api_key+'&app_id='+current_user.app_id+'&event=Contact Info&period=30days')
+        def communication(meta, api_key, app_id)
+          uri = URI.parse('https://touch-rate.com/o?method=events&api_key='+api_key+'&app_id='+app_id+'&event=Contact Info&period=30days')
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = true
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           request = Net::HTTP::Get.new(uri.request_uri)
           resp = http.request(request)
           results = JSON.parse(resp.body)
-          data = results["2015"]
+          data = results["2016"]
           title = results["meta"][meta].length
         end
 
 
-        def timePeriod
-          uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+current_user.api_key+'&app_id='+current_user.app_id)
+        def timePeriod(api_key, app_id)
+          uri = URI.parse('https://touch-rate.com/o/analytics/dashboard?api_key='+api_key+'&app_id='+app_id)
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = true
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
