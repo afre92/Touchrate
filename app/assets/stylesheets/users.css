@@ -1,0 +1,22 @@
+.navbar {
+  height: 50px;
+  background-color: #1a1a1a;
+  margin-top: -18px;
+}
+body{
+    margin:0;
+}
+
+
+h1 h2 h3 h4 h5 h6 {
+  margin:0;
+}
+.companyLogo {
+  height: 40px;
+  width: 140px;
+  padding-top: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}

@@ -1,6 +1,9 @@
 ul.list li{
  display: inline-block;
 }
+ul.list {
+  margin-top: 0px;
+}
 ul, li {
    list-style-type: none;
 }
@@ -16,10 +19,11 @@ tr, td {
   width: 35%;
 
 }
+body{
+    margin:0;
 
-td {
-  /*height: 80px;*/
 }
+
 
 table {
   border-collapse: collapse;
@@ -29,7 +33,7 @@ table {
 
 
 .icons {
-  float: left;
+  float: right;
 }
 td.top {
   border-top: 3px solid #1a1a1a;
@@ -185,6 +189,8 @@ ul li p.md {
 
 }
 .rng{
+  font-weight: 500;
+  color: white;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 5px;
@@ -236,4 +242,22 @@ p.results2 {
 
 p.results3 {
   margin-bottom: 0px;
+}
+
+
+ul.ranges li {
+  display: inline-block;
+
+}
+
+ul.ranges {
+    float: right;
+    padding-right: 20px;
+}
+
+ul.ranges p {
+  margin-bottom: 5px;
+  font-family: "Verdana", Times, serif;
+  font-size: 12px;
+  /*font-weight: 600;*/
 }

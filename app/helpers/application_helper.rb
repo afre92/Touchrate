@@ -5,6 +5,42 @@ module ApplicationHelper
     require "date"
     require 'jsonpath'
 
+  #
+  def milToDate(mil)
+    d = Time.strptime(mil.to_s, '%Q')
+    d.strftime("%m-%d-%Y")
+  end
+
+
+  def numofStores(api_key, app_id)
+    uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id+'&period=['+getDateRange('from')+','+getDateRange('to')+']')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    resp = http.request(request)
+    results = JSON.parse(resp.body)
+    results["aaData"].length
+  end
+
+   def sessionsTime(api_key, app_id)
+     t = 0
+     s = 0
+     uri = URI.parse('https://touch-rate.com/o/analytics/sessions?api_key='+api_key+'&app_id='+app_id+'&period=['+getDateRange('from')+','+getDateRange('to')+']')
+     http = Net::HTTP.new(uri.host, uri.port)
+     http.use_ssl = true
+     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+     request = Net::HTTP::Get.new(uri.request_uri)
+     resp = http.request(request)
+     results = JSON.parse(resp.body)
+     results.each do |n|
+       t += n["d"]
+       s += n["t"]
+     end
+     total =  t/s
+     return total/60.to_f
+   end
+
 
    def getDateRange(arg)
      url = request.original_url
@@ -128,7 +164,7 @@ module ApplicationHelper
            if algo2[int] == nil
              return "No Data"
            else
-               vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
+               vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")[0,24]
            end
       end
       def subCategories(int, api_key, app_id)
@@ -148,7 +184,7 @@ module ApplicationHelper
            if algo2[int] == nil
              return "No Data"
            else
-             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ").gsub("Games", "")
+             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ").gsub("Games", "")[0,24]
            end
       end
 
@@ -169,7 +205,7 @@ module ApplicationHelper
            if algo2[int] == nil
              return "No Data"
            else
-             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ")
+             return  vow = algo2[int][0].gsub("\\nGames"," ").gsub("Games\\n"," ").gsub("Game","")[0,24]
            end
       end
 

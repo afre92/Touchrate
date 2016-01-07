@@ -1,5 +1,24 @@
 $(document).ready(function(){
 
+//   validate();
+//    $('#inputName, #inputEmail, #inputTel').change(validate);
+// });
+
+// function validate(){
+//    if ($('#from').val().length   >   0   &&
+//        $('#to').val().length  >   0 )
+//        {
+//        $(".calendar").prop("disabled", false)
+//    }
+//    else {
+//        $(".calendar").prop("disabled", true);
+//    }
+// }
+
+validate();
+   $('#from, #to').change(validate);
+
+
 
 
   $(function() {
@@ -154,7 +173,7 @@ $(document).ready(function(){
       if (a.content.c > b.content.c) return 1;
       return 0;
     });
-      $(".results7-"+pos).append(newObj[newObj.length - int]["name"].replace("Games\\n", " ").replace("\\nGames"," ").replace("Games", ""))
+      $(".results7-"+pos).append(newObj[newObj.length - int]["name"].replace("Games\\n", " ").replace("\\nGames"," ").replace("Games", "").slice(0,24))
   }
 
 
@@ -182,9 +201,21 @@ $(document).ready(function(){
       return 0
     })
 
-      $(".results8-"+pos).append(newObj[newObj.length - int]["name"].replace("Games\\n", " ").replace("\\nGames"," ").replace("Games", ""))
+      $(".results8-"+pos).append(newObj[newObj.length - int]["name"].replace("Games\\n", " ").replace("\\nGames"," ").replace("Games", "").slice(0,24))
 
   }
+
+    function sessionsNumber(data){
+      var t = 0
+      var l = data.length
+      for (var i = 0; i < l; i++) {
+        t += data[i]["t"]
+    }
+    $(".results2").append(t)
+  }
+
+
+
 
   function allProducts(obj, int, pos){
     var keys = obj["meta"]["title"];
@@ -209,7 +240,7 @@ $(document).ready(function(){
       return 0;
     });
 
-      $(".results9-"+pos).append(newObj[newObj.length - int]["name"].replace("Games", ""))
+      $(".results9-"+pos).append(newObj[newObj.length - int]["name"].replace("Games", "").slice(0,24))
       // console.log(newObj)
   }
 
@@ -239,6 +270,8 @@ $(document).ready(function(){
           $('.results9-2').html("")
           $('.results9-3').html("")
           $('.time-period').html("")
+          document.getElementById('to').value='';
+          document.getElementById('from').value='';
           $.ajax({
               url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=7days',
               dataType: 'jsonp',
@@ -326,6 +359,8 @@ $(document).ready(function(){
           $('.results9-2').html("")
           $('.results9-3').html("")
           $('.time-period').html("")
+          document.getElementById('to').value=''
+          document.getElementById('from').value=''
           $.ajax({
               url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=30days',
               dataType: 'jsonp',
@@ -397,23 +432,109 @@ $(document).ready(function(){
       }); // end of 30days button
 
 
-      $('.calendar').click(function(){ // errors need to raised if one of the dates is missing
+      $('.calendar').click(function(){
           var fromCalendar = document.getElementById("from").value
           var toCalendar = document.getElementById("to").value
             var f = new Date(fromCalendar).getTime()
             var t = new Date(toCalendar).getTime()
 
             $('#month').html("")
+            $('.results1').html("")
+            $('.results2').html("")
+            $('.results3').html("")
             $('.results4').html("")
+            $('.results5').html("")
+            $('.results7-1').html("")
+            $('.results7-2').html("")
+            $('.results7-3').html("")
+            $('.results8-1').html("")
+            $('.results8-2').html("")
+            $('.results8-3').html("")
+            $('.results9-1').html("")
+            $('.results9-2').html("")
+            $('.results9-3').html("")
+            $('.time-period').html("")
             $.ajax({
                 url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=['+f+','+t+']',
                 dataType: 'jsonp',
                 success: function(results){
+                    sessionsNumber(results)
                     drawChart(results)
                     popularDay(results)
                   }
             });
 
+            $.ajax({
+                url: 'https://touch-rate.com/o/analytics/dashboard?api_key='+key+'&app_id='+id+'&period=['+f+','+t+']',
+                dataType: 'jsonp',
+                success: function(data){
+                    // numberOfStores(data, "7days")
+                    averageTime(data)
+                 }
+            });
+
+            $.ajax({
+              url: 'https://touch-rate.com/o?method=events&api_key='+key+'&app_id='+id+'&event=Categories&segmentation=title&period=['+f+','+t+']',
+              dataType: 'jsonp',
+              success: function(data4){
+                allCategories(data4, 1, 1)
+                allCategories(data4, 2, 2)
+                allCategories(data4, 3, 3)
+              }
+            });
+
+              $.ajax({
+                url: 'https://touch-rate.com/o?method=events&api_key='+key+'&app_id='+id+'&event=Subcategories&segmentation=title&period=['+f+','+t+']',
+                dataType: 'jsonp',
+                success: function(data5){
+                  allSubcategories(data5, 1, 1)
+                  allSubcategories(data5, 2, 2)
+                  allSubcategories(data5, 3, 3)
+                }
+              });
+
+
+              $.ajax({
+                url: 'https://touch-rate.com/o?method=events&api_key='+key+'&app_id='+id+'&event=Products&segmentation=title&period=['+f+','+t+']',
+                dataType: 'jsonp',
+                success: function(data5){
+                  allProducts(data5, 1, 1)
+                  allProducts(data5, 2, 2)
+                  allProducts(data5, 3, 3)
+                }
+              });
+
+
+
+            $.ajax({
+                url: 'https://touch-rate.com/o?method=user_details&api_key='+key+'&app_id='+id+'&period=['+f+','+t+']',
+                dataType: 'jsonp',
+                success: function(data3){
+                    maxStore(data3)
+                }
+            });
+
+            $.ajax({
+              url: 'https://touch-rate.com/o/analytics/dashboard?api_key='+key+'&app_id='+id,
+              dataType: 'jsonp',
+              success: function(data){
+                period(data, "7days")
+              }
+            });
+
         }); // end of calendar
 
 }); // end of doc ready
+
+
+
+function validate(){
+   if ($('#from').val().length   ===   10   &&
+       $('#to').val().length  ===   10 ) {
+       $(".calendar").prop("disabled", false);
+   }
+   else {
+    //  console.log("gdfgdfg")
+       $(".calendar").prop("disabled", true);
+   }
+}

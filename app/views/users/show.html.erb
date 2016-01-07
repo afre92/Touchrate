@@ -2,13 +2,6 @@
 
 
 
-<ul class="users">
-  <% @user.each do |user| %>
-    <li>
-       <p> <%= user.name %></p>,<p><%= user.app_id %> </p>
-    </li>
-  <% end %>
-</ul>
 
 
 <!DOCTYPE html>
@@ -24,7 +17,9 @@
   </head>
   <body>
 
-
+<div class="navbar">
+  <%= image_tag("trate.png", :class => 'companyLogo') %>
+</div>
 <!-- <input type="text" id="useto>
 <input type="text" id="pass" />
 <button onclick="submit();" href="javascript:;">Submit</button> -->
@@ -40,24 +35,26 @@
 <% end %>
 
 <ul class="middle-logo">
-  <li><%= image_tag("icon.png") %></li>
-  <li><p class="touchrate">Touchrate</p></li>
+  <li></li>
+  <li></li>
 </ul>
 
-<p><%= getDateRange("from") %></p>
 
 
-<input name="savedataoriginale" id="from" type="text">
-<input name="savedataoriginale" id="to" type="text">
 
 
 
 <% @user.each do |user| %>
 
-<p style="float: left; font-weight:700">PERIOD: &nbsp</p><p class="time-period"><%= timePeriod(user.api_key, user.app_id )%></p>
-<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="7days rng" type="button" >7 days</button>
-<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="30days rng" type="button" >30 days</button>
-<button style="float:right; margin-right: 6px; margin-left: 6px; margin-bottom: 3px; font-size: 13px; color: white;"class="calendar rng"type="button" disable="disable" name="button"><i class="fa fa-calendar"></i></button>
+<!-- <p style="float: left; font-weight:700">PERIOD: &nbsp</p><p class="time-period"><%= milToDate(getDateRange("from")) %> - <%= milToDate(getDateRange("to") )%></p> -->
+<ul class="ranges">
+  <li><p>Start Date:</p><input name="savedataoriginale" id="from" type="text"></li>
+  <li><p>End Date:</p><input name="savedataoriginale" id="to" type="text"></li>
+  <li><button class="calendar rng"type="button" disabled="disabled" name="button"><i class="fa fa-refresh"></i></button></li>
+  <li><button class="7days rng" type="button" >7 days</button></li>
+  <li><button class="30days rng" type="button">30 days</button></li>
+
+</ul>
 <!-- <form>
   From:<br>
   <input class="from" type="text" name="firstname">
@@ -83,7 +80,7 @@
         <td class="left-margin bottom">
           <ul class="list ">
             <li><%= image_tag("building.png")%></li>
-            <li class="first results"><p class="results1"><%= overallData("30days", "total_users", user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;"><%= user.name %> stores <br> actively participating <br> in this program</li>
+            <li class="first results"><p class="results1"><%# numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;"><%= user.name %> stores <br> actively participating <br> in this program</li>
           </ul>
         </td>
         <td>
@@ -123,7 +120,7 @@
         <td>
           <ul class="list">
             <li><%= image_tag("time.png")%></li>
-            <li class="second results" ><p class="results5 md"><%= overallData("30days", "avg_time", user.api_key, user.app_id)%></p><p class="mid-description">Average time spent<br> on application</li>
+            <li class="second results" ><p class="results5 md"><%= sessionsTime(user.api_key, user.app_id)%> Minutes</p><p class="mid-description">Average time spent<br> on application</li>
           </ul>
         </td>
         <td class="right-margin">
