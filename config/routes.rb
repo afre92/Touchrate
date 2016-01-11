@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     # root 'users#show'
     # resources :users
     get 'users/:app_id' => 'users#show'
+    resources :users
     # get 'home#index/:api_key', :controller => 'users'
   # Example of regular route:
 
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     get '/login' => 'sessions#new'
     post 'login' => 'sessions#create'
     delete 'logout' => 'sessions#destroy'
-    # get user
+    # get 'users' => 'users#index'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

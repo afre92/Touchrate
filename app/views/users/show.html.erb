@@ -66,21 +66,30 @@
  <div>
     <table>
       <tr>
-        <td  class="top left-margin" >
+        <td  class="marginssss" colspan="3">
+          <ul class="list" style="padding-left: 0px;">
+            <li><%= image_tag(user.image_url.to_s, :class => "userLogo" )%></li>
+            <li><p class="daterange"><%= user.name.upcase %> SNAPSHOP - <b class="jsfrom"><%= milToDate(getDateRange("from")).gsub("-","/") %></b> - <b class="jsto"><%= milToDate(getDateRange("to")).gsub("-","/") %> </b></p></li>
+          </ul>
+        </td>
+
+      </tr>
+      <tr>
+        <td  class="to left-margin" >
           <div class="top title" style="float:right;">OVERALL PROGRAM</div>
         </td>
-        <td  class="top ">
+        <td  class="to ">
 
         </td>
-        <td  class="top right-margin">
-          <div class="top title" style="text-align:center;">ENGAGEMENTS LEADER </div>
+        <td  class="to right-margin">
+          <div class="top title" style="text-align:center;">ENGAGEMENT LEADER </div>
         </td>
       </tr>
       <tr>
         <td class="left-margin bottom">
           <ul class="list ">
             <li><%= image_tag("building.png")%></li>
-            <li class="first results"><p class="results1"><%# numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;"><%= user.name %> stores <br> actively participating <br> in this program</li>
+            <li class="first results"><p class="results1"><%= numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;"><%= user.name %> stores <br> actively participating <br> in this program</li>
           </ul>
         </td>
         <td>
@@ -172,7 +181,7 @@
         </td>
       </tr>
     </table>
-
+    <!-- <div>  </div> -->
        <% end %> <!-- end of  users.each -->
 
     <!-- <button class="button" id="7days" data-localize="commom.7days">7 days</buttom> -->

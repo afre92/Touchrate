@@ -1,19 +1,5 @@
 $(document).ready(function(){
 
-//   validate();
-//    $('#inputName, #inputEmail, #inputTel').change(validate);
-// });
-
-// function validate(){
-//    if ($('#from').val().length   >   0   &&
-//        $('#to').val().length  >   0 )
-//        {
-//        $(".calendar").prop("disabled", false)
-//    }
-//    else {
-//        $(".calendar").prop("disabled", true);
-//    }
-// }
 
 validate();
    $('#from, #to').change(validate);
@@ -63,7 +49,7 @@ validate();
     };
 
   function numberOfStores(results, time) {
-    $(".results1").append(results[time]["dashboard"]["total_users"]["total"]),
+    // $(".results1").append(results[time]["dashboard"]["total_users"]["total"]),
     $(".results2").append(results[time]["dashboard"]["total_sessions"]["total"])
 
   };
@@ -150,7 +136,25 @@ validate();
       $(".results5").append(data["7days"]["dashboard"]["avg_time"]["total"])
   }
 
+  function newDate(data, arg){
+    var a = data[0]["_id"]
+    var b = data[data.length - 1]["_id"]
+    var t = "/"
+    var a1 = a.slice(0,4)
+    var a3 = a.substring(5,10)
+    var b1 = b.slice(0,4)
+    var b3 = b.substring(5,10)
+    var jsto =  b3.concat(t).concat(b1).replace("-","/")
+    var jsfrom = a3.concat(t).concat(a1).replace("-","/")
+    if( arg === "from") {
+      $(".jsfrom").append(jsfrom)
+    }
+    else {
+      $(".jsto").append(jsto)
+    }
 
+
+  }
   function allCategories(obj, int, pos){
     var keys = obj["meta"]["title"];
     var newObj = [];
@@ -214,6 +218,10 @@ validate();
     $(".results2").append(t)
   }
 
+    function numStore(data) {
+      num = data["aaData"].length
+      $('.results1').append(num)
+    }
 
 
 
@@ -241,7 +249,6 @@ validate();
     });
 
       $(".results9-"+pos).append(newObj[newObj.length - int]["name"].replace("Games", "").slice(0,24))
-      // console.log(newObj)
   }
 
     $.ajax({
@@ -270,14 +277,29 @@ validate();
           $('.results9-2').html("")
           $('.results9-3').html("")
           $('.time-period').html("")
+          $('.jsfrom').html("")
+          $('.jsto').html("")
           document.getElementById('to').value='';
           document.getElementById('from').value='';
+          $.ajax({
+            url: 'https://touch-rate.com/o?method=user_details&api_key='+key+'&app_id='+id+'&period=7days',
+            dataType: 'jsonp',
+            success: function(results){
+              numStore(results)
+            }
+          });
+
+
           $.ajax({
               url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=7days',
               dataType: 'jsonp',
               success: function(results){
                   drawChart(results)
                   popularDay(results)
+                  newDate(results, "from")
+                  newDate(results, "to")
+
+
                 }
           });
 
@@ -359,14 +381,25 @@ validate();
           $('.results9-2').html("")
           $('.results9-3').html("")
           $('.time-period').html("")
+          $('.jsfrom').html("")
+          $('.jsto').html("")
           document.getElementById('to').value=''
           document.getElementById('from').value=''
+          $.ajax({
+            url: 'https://touch-rate.com/o?method=user_details&api_key='+key+'&app_id='+id+'&period=30days',
+            dataType: 'jsonp',
+            success: function(results){
+              numStore(results)
+            }
+          });
           $.ajax({
               url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=30days',
               dataType: 'jsonp',
               success: function(results){
                   drawChart(results)
                   popularDay(results)
+                  newDate(results, "from")
+                  newDate(results, "to")
                 }
           });
 
@@ -437,7 +470,7 @@ validate();
           var toCalendar = document.getElementById("to").value
             var f = new Date(fromCalendar).getTime()
             var t = new Date(toCalendar).getTime()
-
+            console.log(fromCalendar)
             $('#month').html("")
             $('.results1').html("")
             $('.results2').html("")
@@ -454,6 +487,10 @@ validate();
             $('.results9-2').html("")
             $('.results9-3').html("")
             $('.time-period').html("")
+            $('.jsfrom').html("")
+            $('.jsto').html("")
+            $('.jsfrom').append(fromCalendar)
+            $('.jsto').append(toCalendar)
             $.ajax({
                 url: 'https://touch-rate.com/o/analytics/sessions?api_key='+key+'&app_id='+id+'&period=['+f+','+t+']',
                 dataType: 'jsonp',

@@ -1,7 +1,7 @@
 .navbar {
   height: 50px;
   background-color: #1a1a1a;
-  margin-top: -18px;
+  margin-top: -1px;
 }
 body{
     margin:0;
@@ -19,4 +19,43 @@ h1 h2 h3 h4 h5 h6 {
   margin-left: auto;
   margin-right: auto;
 
+}
+
+
+.userLogo {
+  height: 50px;
+  width: 200px;
+  padding-left: 0px;
+}
+
+.marginssss {
+  border-top: 3px solid #1a1a1a;
+  border-left: 3px solid #1a1a1a;
+  border-right: 3px solid #1a1a1a;
+}
+
+p.daterange {
+  /*padding-top: -30px;*/
+  display: inline;
+  color: #1a1a1a;
+  font-size: 20px;
+  font-family: "Verdana", Times, serif;
+  font-weight: 600;
+
+  /*padding-bottom: 7px;*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+
+  /*float: right;*/
+
+}
+.jsfrom {
+  margin: 0;
+  padding: 0;
+  border:0;
+}
+.jsto {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }

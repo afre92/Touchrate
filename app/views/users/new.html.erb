@@ -1,9 +1,10 @@
 <h1>Create new User</h1>
 
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@user)  do |f| %>
       <%= f.text_field :name, :placeholder => "Name" %>
       <%= f.text_field :api_key, :placeholder => "API key" %>
       <%= f.text_field :app_id, :placeholder => "APP ID" %>
       <%= f.password_field :password, :placeholder => "Password" %>
+      <%= f.file_field :image, :placeholder => "Image" %>
       <%= f.submit "Create User", class: "btn-submit" %>
     <% end %>

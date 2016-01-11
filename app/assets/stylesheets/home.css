@@ -3,6 +3,7 @@ ul.list li{
 }
 ul.list {
   margin-top: 0px;
+  /*padding-left: 0px;*/
 }
 ul, li {
    list-style-type: none;
@@ -231,16 +232,19 @@ ul.middle-logo li{
 
 
 p.results1 {
+  color: #f7901e;
   padding-left: 50px;
   margin-bottom: 10px;
 }
 
 p.results2 {
+  color: #f7901e;
   margin-bottom: 10px;
   padding-left: 40px;
 }
 
 p.results3 {
+  color: #f7901e;
   margin-bottom: 0px;
 }
 
@@ -260,4 +264,9 @@ ul.ranges p {
   font-family: "Verdana", Times, serif;
   font-size: 12px;
   /*font-weight: 600;*/
+}
+.navbar {
+  height: 50px;
+  background-color: #1a1a1a;
+  margin-top: -1px;
 }

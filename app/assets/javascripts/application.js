@@ -19,3 +19,5 @@
 //= require morris
 //= require jquery-ui
 //= require_tree .
+//*** This code is copyright 2002-2003 by Gavin Kistner, !@phrogz.net
+//*** It is covered under the license viewable at http://phrogz.net/JS/_ReuseLicense.txt

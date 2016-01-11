@@ -5,11 +5,13 @@ module ApplicationHelper
     require "date"
     require 'jsonpath'
 
-  #
+
   def milToDate(mil)
     d = Time.strptime(mil.to_s, '%Q')
     d.strftime("%m-%d-%Y")
   end
+
+
 
 
   def numofStores(api_key, app_id)
