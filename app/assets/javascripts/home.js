@@ -49,7 +49,6 @@ validate();
     };
 
   function numberOfStores(results, time) {
-    // $(".results1").append(results[time]["dashboard"]["total_users"]["total"]),
     $(".results2").append(results[time]["dashboard"]["total_sessions"]["total"])
 
   };
@@ -72,7 +71,6 @@ validate();
 
   function popularDay(results){
     var d = null
-
     arr = [0,0,0,0,0,0,0]
     var l = results.length
     for (var i = 0 ; i < l ; i++){
@@ -101,6 +99,8 @@ validate();
         arr[6] += results[i]["t"]
       }
     }
+
+
 
   var maxIndex = arr.indexOf(Math.max(...arr))
 
