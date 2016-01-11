@@ -14,7 +14,6 @@ validate();
       maxDate: -2,
       onClose: function( selectedDate ) {
         var hry = $( "#to" ).datepicker( "option", "minDate", selectedDate );
-        // console.log(hry)
       }
     });
     $( "#to" ).datepicker({
@@ -23,7 +22,6 @@ validate();
       maxDate: 0,
       onClose: function( selectedDate ) {
         var yu = $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-        // console.log(yu)
       }
     });
   });
@@ -42,8 +40,8 @@ validate();
           labels: ['Engagements'],
           lineColors: ['#1a1a1a'],
           smooth: false,
-          resize: true,
-          // pointFillColors: ['#ff8433']
+          resize: true
+
 
         })
     };
@@ -571,7 +569,6 @@ function validate(){
        $(".calendar").prop("disabled", false);
    }
    else {
-    //  console.log("gdfgdfg")
        $(".calendar").prop("disabled", true);
    }
 }
