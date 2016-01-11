@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem 'pg',             '0.17.1'
 gem 'ruby'
 # gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -46,7 +46,10 @@ end
 #   gem 'mini_backtrace',     '0.1.3'
 #   gem 'guard-minitest',     '2.3.1'
 # end
-
+group :production do
+  gem 'pg',             '0.17.1'
+  gem 'rails_12factor', '0.0.2'
+end
 
 # gem 'figaro'
  # gem 'nested_form'
