@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-gem 'ruby', '2.0.0'
+gem 'ruby'
 # gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -35,12 +35,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Unicorn as the app server
 # gem 'jquery-ui-rails'
 # gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
-# group :development, :test do
-#   # gem 'pg'
-#   gem 'byebug',      '3.4.0'
-#   gem 'web-console', '2.0.0.beta3'
-#   gem 'spring',      '1.1.3'
-# end
+group :development, :test do
+  # gem 'pg'
+  gem 'byebug',      '3.4.0'
+  gem 'web-console', '2.0.0.beta3'
+  gem 'spring',      '1.1.3'
+end
 
 # group :test do
 #   gem 'minitest-reporters', '1.0.5'
@@ -58,16 +58,12 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'byebug'
-  # gem 'dotenv-rails'
-  # gem 'capistrano-figaro-yml', '~> 1.0.2'
-  # gem 'capistrano', '~> 3.4.0'
-  # gem 'capistrano-rails', '~> 1.1'
-  # gem 'capistrano-passenger'
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  # gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  # gem 'spring'
+#   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+#   # gem 'byebug'
+#   gem 'dotenv-rails'
+#
+#   # Access an IRB console on exception pages or by using <%= console %> in views
+#
+#   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+#   gem 'spring'
 # end
