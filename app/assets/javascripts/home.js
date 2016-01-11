@@ -48,7 +48,6 @@ validate();
 
   function numberOfStores(results, time) {
     $(".results2").append(results[time]["dashboard"]["total_sessions"]["total"])
-
   };
 
   function maxStore(results){
