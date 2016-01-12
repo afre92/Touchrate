@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/assets/jquery-ui-1.9.2.custom.min.css"> -->
    <meta charset="utf-8">
     <title>TouchRate</title>
-    
+
   </head>
   <body>
 
@@ -90,13 +90,13 @@
         <td class="left-margin bottom">
           <ul class="list ">
             <li><%= image_tag("building.png")%></li>
-            <li class="first results"><p class="results1"><%= numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;"><%= user.name %> stores <br> actively participating <br> in this program</li>
+            <li class="first results"><p class="results1"><%= numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">Store(s) actively <br>participating in <br> this <%= user.name.upcase %>  program</li>
           </ul>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("group.png") %></li>
-            <li class="first results"><p class="results2"><%= totalSessions(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> <%= user.name %> assortment</li>
+            <li class="first results"><p class="results2"><%= totalSessions(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> <%= user.name.upcase %> assortment</li>
           </ul>
         </td>
         <td class="right-margin bottom">
