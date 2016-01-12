@@ -23,7 +23,7 @@ h1 h2 h3 h4 h5 h6 {
 
 
 .userLogo {
-  height: 50px;
+  height: 63px;
   width: 200px;
   padding-left: 0px;
 }
@@ -38,15 +38,9 @@ p.daterange {
   /*padding-top: -30px;*/
   display: inline;
   color: #1a1a1a;
-  font-size: 20px;
+  font-size: 25px;
   font-family: "Verdana", Times, serif;
   font-weight: 600;
-
-  /*padding-bottom: 7px;*/
-  /*margin: 0;*/
-  /*padding: 0;*/
-
-  /*float: right;*/
 
 }
 .jsfrom {
@@ -58,4 +52,9 @@ p.daterange {
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+
+ul li p.dates {
+  font-weight: 600;
 }

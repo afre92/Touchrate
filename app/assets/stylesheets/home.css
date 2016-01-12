@@ -120,6 +120,7 @@ div.title {
   font-size: 22px;
   font-family: "Verdana", Times, serif;
   font-weight: bold;
+  /*float: left;*/
 }
 
 
@@ -270,3 +271,6 @@ ul.ranges p {
   background-color: #1a1a1a;
   margin-top: -1px;
 }
+/*div.top.title {
+  float: left;
+}*/

@@ -49,8 +49,8 @@
 
 <!-- <p style="float: left; font-weight:700">PERIOD: &nbsp</p><p class="time-period"><%= milToDate(getDateRange("from")) %> - <%= milToDate(getDateRange("to") )%></p> -->
 <ul class="ranges">
-  <li><p>Start Date:</p><input name="savedataoriginale" id="from" type="text"></li>
-  <li><p>End Date:</p><input name="savedataoriginale" id="to" type="text"></li>
+  <li><p class="dates">Start Date</p><input name="savedataoriginale" id="from" type="text"></li>
+  <li><p class="dates">End Date</p><input name="savedataoriginale" id="to" type="text"></li>
   <li><button class="calendar rng"type="button" disabled="disabled" name="button"><i class="fa fa-refresh"></i></button></li>
   <li><button class="7days rng" type="button" >7 days</button></li>
   <li><button class="30days rng" type="button">30 days</button></li>
@@ -68,7 +68,7 @@
     <table>
       <tr>
         <td  class="marginssss" colspan="3">
-          <ul class="list" style="padding-left: 0px;">
+          <ul class="list3" style="padding-left: 0px;">
             <li><%= image_tag(user.image_url.to_s, :class => "userLogo" )%></li>
             <li><p class="daterange"><%= user.name.upcase %> SNAPSHOP - <b class="jsfrom"><%= milToDate(getDateRange("from")).gsub("-","/") %></b> - <b class="jsto"><%= milToDate(getDateRange("to")).gsub("-","/") %> </b></p></li>
           </ul>
@@ -77,7 +77,7 @@
       </tr>
       <tr>
         <td  class="to left-margin" >
-          <div class="top title" style="float:right;">OVERALL PROGRAM</div>
+          <div class="top title">OVERALL PROGRAM</div>
         </td>
         <td  class="to ">
 
