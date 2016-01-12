@@ -130,7 +130,16 @@ validate();
 
 
   function averageTime(data){
-      $(".results5").append(data["7days"]["dashboard"]["avg_time"]["total"])
+    var t = 0
+    var d = 0
+    var l = data.length
+    for ( var i = 0 ; i < l ; i++){
+      t += data[i]["t"]
+      d += data[i]["d"]
+    }
+    var subtotal = (d/t)/60
+    var total = subtotal.toFixed(2)
+    $(".results5").append(total+" Minutes")
   }
 
   function newDate(data, arg){
@@ -295,6 +304,7 @@ validate();
                   popularDay(results)
                   newDate(results, "from")
                   newDate(results, "to")
+                  averageTime(results)
 
 
                 }
@@ -305,7 +315,7 @@ validate();
               dataType: 'jsonp',
               success: function(data){
                   numberOfStores(data, "7days")
-                  averageTime(data)
+
                }
           });
           $.ajax({
@@ -397,6 +407,7 @@ validate();
                   popularDay(results)
                   newDate(results, "from")
                   newDate(results, "to")
+                  averageTime(results)
                 }
           });
 
@@ -405,7 +416,6 @@ validate();
               dataType: 'jsonp',
               success: function(data){
                   numberOfStores(data, "30days")
-                  averageTime(data)
                }
           });
 
@@ -495,6 +505,7 @@ validate();
                     sessionsNumber(results)
                     drawChart(results)
                     popularDay(results)
+                    averageTime(results)
                   }
             });
 
@@ -503,7 +514,7 @@ validate();
                 dataType: 'jsonp',
                 success: function(data){
                     // numberOfStores(data, "7days")
-                    averageTime(data)
+                    // averageTime(data)
                  }
             });
 
@@ -545,6 +556,7 @@ validate();
                 dataType: 'jsonp',
                 success: function(data3){
                     maxStore(data3)
+                    numStore(data3)
                 }
             });
 

@@ -39,8 +39,9 @@ module ApplicationHelper
        t += n["d"]
        s += n["t"]
      end
-     total =  t/s
-     return total/60.to_f.round(1)
+     subtotal =  t/s
+     total = subtotal/60.to_f
+     return total.round(2)
    end
 
 
