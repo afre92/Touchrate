@@ -40,7 +40,7 @@ module ApplicationHelper
        s += n["t"]
      end
      total =  t/s
-     return total/60.to_f
+     return total/60.to_f.round(1)
    end
 
 
