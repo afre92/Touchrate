@@ -26,6 +26,7 @@ h1 h2 h3 h4 h5 h6 {
   height: 55px;
   width: 200px;
   padding-left: 0px;
+  padding-left: 15px;
 }
 
 .marginssss {
@@ -35,7 +36,7 @@ h1 h2 h3 h4 h5 h6 {
 }
 
 p.daterange {
-  /*padding-top: -30px;*/
+  padding-left: 15px;
   display: inline;
   color: #1a1a1a;
   font-size: 25px;

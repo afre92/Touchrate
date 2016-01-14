@@ -116,6 +116,7 @@ div.title {
 }
 
 .top.title {
+  padding-left: 15px;
   color: #1a1a1a;
   font-size: 22px;
   font-family: "Verdana", Times, serif;
@@ -271,6 +272,7 @@ ul.ranges p {
   background-color: #1a1a1a;
   margin-top: -1px;
 }
-/*div.top.title {
-  float: left;
-}*/
+div.mainTable {
+   margin: auto;
+   width: 1100px;
+}

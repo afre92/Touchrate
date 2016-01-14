@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.where(app_id: params[:app_id])
   end
 
-  
+
   def create
       @user = User.new(user_params)
 
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :app_id, :api_key, :password, :image)
+      params.require(:user).permit(:name, :app_id, :api_key, :password, :image, :remote_image_url)
     end
 
 end

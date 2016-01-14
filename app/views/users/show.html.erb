@@ -48,14 +48,7 @@
 <% @user.each do |user| %>
 
 <!-- <p style="float: left; font-weight:700">PERIOD: &nbsp</p><p class="time-period"><%= milToDate(getDateRange("from")) %> - <%= milToDate(getDateRange("to") )%></p> -->
-<ul class="ranges">
-  <li><p class="dates">Start Date</p><input name="savedataoriginale" id="from" type="text"></li>
-  <li><p class="dates">End Date</p><input name="savedataoriginale" id="to" type="text"></li>
-  <li><button class="calendar rng"type="button" disabled="disabled" name="button"><i class="fa fa-refresh"></i></button></li>
-  <li><button class="7days rng" type="button" >7 days</button></li>
-  <li><button class="30days rng" type="button">30 days</button></li>
 
-</ul>
 <!-- <form>
   From:<br>
   <input class="from" type="text" name="firstname">
@@ -64,7 +57,15 @@
   <input type="text" name="lastname">
 </form> -->
 
- <div>
+ <div class="mainTable">
+   <ul class="ranges">
+     <li><p class="dates">Start Date</p><input name="savedataoriginale" id="from" type="text"></li>
+     <li><p class="dates">End Date</p><input name="savedataoriginale" id="to" type="text"></li>
+     <li><button class="calendar rng"type="button" disabled="disabled" name="button"><i class="fa fa-refresh"></i></button></li>
+     <li><button class="7days rng" type="button" >7 days</button></li>
+     <li><button class="30days rng" type="button">30 days</button></li>
+
+   </ul>
     <table>
       <tr>
         <td  class="marginssss" colspan="3">

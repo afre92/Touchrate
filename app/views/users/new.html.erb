@@ -6,5 +6,10 @@
       <%= f.text_field :app_id, :placeholder => "APP ID" %>
       <%= f.password_field :password, :placeholder => "Password" %>
       <%= f.file_field :image, :placeholder => "Image" %>
+      <p>
+        <%= f.label :remote_image_url %> <br />
+        <%= f.text_field :remote_image_url %>
+      </p>
+
       <%= f.submit "Create User", class: "btn-submit" %>
     <% end %>

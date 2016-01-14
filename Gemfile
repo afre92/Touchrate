@@ -18,7 +18,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jsonpath', '~> 0.5.8'
 gem 'bcrypt', '~> 3.1.7'
 
-# ruby "2.2.0"
+ruby "2.2.2"
 
 group :development, :test do
   # gem 'sqlite3',     '1.3.9'
@@ -34,5 +34,5 @@ end
 # end
 group :production do
   # gem 'pg'
-  gem 'rails_12factor' 
+  gem 'rails_12factor'
 end
