@@ -18,13 +18,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jsonpath', '~> 0.5.8'
 gem 'bcrypt', '~> 3.1.7'
 
-ruby "2.2.2"
+# ruby "2.2.0"
 
 group :development, :test do
   # gem 'sqlite3',     '1.3.9'
-  gem 'byebug',      '3.4.0'
+  gem 'byebug'
   gem 'web-console', '2.0.0.beta3'
-  gem 'spring',      '1.1.3'
+  gem 'spring'
 end
 
 # group :test do
@@ -34,5 +34,5 @@ end
 # end
 group :production do
   # gem 'pg'
-  gem 'rails_12factor', '0.0.2'
+  gem 'rails_12factor' 
 end
