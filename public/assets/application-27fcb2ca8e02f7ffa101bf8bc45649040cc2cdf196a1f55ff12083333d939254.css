@@ -124,10 +124,12 @@ div.title {
 }
 
 .top.title {
+  padding-left: 15px;
   color: #1a1a1a;
   font-size: 22px;
   font-family: "Verdana", Times, serif;
   font-weight: bold;
+  /*float: left;*/
 }
 
 
@@ -277,6 +279,11 @@ ul.ranges p {
   height: 50px;
   background-color: #1a1a1a;
   margin-top: -1px;
+}
+div.mainTable {
+   margin: auto;
+   width: 1100px;
+   margin-bottom: 50px;
 }
 /*! jQuery UI - v1.9.2 - 2016-01-11
 * http://jqueryui.com
@@ -824,9 +831,10 @@ h1 h2 h3 h4 h5 h6 {
 
 
 .userLogo {
-  height: 50px;
+  height: 55px;
   width: 200px;
   padding-left: 0px;
+  padding-left: 15px;
 }
 
 .marginssss {
@@ -836,18 +844,12 @@ h1 h2 h3 h4 h5 h6 {
 }
 
 p.daterange {
-  /*padding-top: -30px;*/
+  padding-left: 15px;
   display: inline;
   color: #1a1a1a;
-  font-size: 20px;
+  font-size: 25px;
   font-family: "Verdana", Times, serif;
   font-weight: 600;
-
-  /*padding-bottom: 7px;*/
-  /*margin: 0;*/
-  /*padding: 0;*/
-
-  /*float: right;*/
 
 }
 .jsfrom {
@@ -859,4 +861,9 @@ p.daterange {
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+
+ul li p.dates {
+  font-weight: 600;
 }
