@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 # gem "fog-aws"
 gem 'rails', '4.2.3'
 gem 'pg'

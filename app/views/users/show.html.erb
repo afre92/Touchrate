@@ -70,7 +70,8 @@
       <tr>
         <td  class="marginssss" colspan="3">
           <ul class="list3" style="padding-left: 0px;">
-            <li><%= image_tag(user.image_url.to_s, :class => "userLogo" )%></li>
+              <li><%= image_tag(user.avatar.url, :class => "userLogo" )%></li>
+            
             <li><p class="daterange"><%= user.name.upcase %> SNAPSHOP - <b class="jsfrom"><%= milToDate(getDateRange("from")).gsub("-","/") %></b> - <b class="jsto"><%= milToDate(getDateRange("to")).gsub("-","/") %> </b></p></li>
           </ul>
         </td>
