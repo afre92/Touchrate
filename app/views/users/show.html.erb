@@ -71,7 +71,7 @@
         <td  class="marginssss" colspan="3">
           <ul class="list3" style="padding-left: 0px;">
               <li><%= image_tag(user.avatar.url, :class => "userLogo" )%></li>
-            
+
             <li><p class="daterange"><%= user.name.upcase %> SNAPSHOP - <b class="jsfrom"><%= milToDate(getDateRange("from")).gsub("-","/") %></b> - <b class="jsto"><%= milToDate(getDateRange("to")).gsub("-","/") %> </b></p></li>
           </ul>
         </td>
@@ -92,19 +92,19 @@
         <td class="left-margin bottom">
           <ul class="list ">
             <li><%= image_tag("building.png")%></li>
-            <li class="first results"><p class="results1"><%= numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">Store(s) actively <br>participating in <br> this <%= user.name.upcase %>  program</li>
+            <li class="first results"><p class="results1"><%= numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">store(s) actively <br>participating in <br> this <%= user.name.upcase %>  program</li>
           </ul>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("group.png") %></li>
-            <li class="first results"><p class="results2"><%= totalSessions(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">Shoppers showed <br> interest in viewing the <br> <%= user.name.upcase %> assortment</li>
+            <li class="first results"><p class="results2"><%= totalSessions(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">shoppers showed <br> interest in viewing the <br> <%= user.name.upcase %> assortment</li>
           </ul>
         </td>
         <td class="right-margin bottom">
           <ul class="list">
             <li><%= image_tag("house.png")%></li>
-            <li class="first results"><p class="results3"><%= maxStore("storeName", user.api_key, user.app_id) %></p><p class="top-description">Leading in <br>program Engagements</p></li>
+            <li class="first results"><p class="results3"><%= maxStore("storeName", user.api_key, user.app_id) %></p><p class="top-description">store leading in <br>program Engagements</p></li>
           </ul>
         </td>
       </tr>
@@ -115,7 +115,7 @@
       </tr>
       <tr  class="center">
         <td class="center left-margin">
-          <div  class = "title" style="float:right;">TOP HIGHLIGHTS</div>
+          <div  class = "title" style="padding-left: 15px;">TOP HIGHLIGHTS</div>
         </td>
         <td style="height:20px;">
         </td>
