@@ -27,7 +27,7 @@ Rails.application.configure do
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
-
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
 
