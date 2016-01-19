@@ -165,7 +165,7 @@ validate();
     var keys = obj["meta"]["title"];
     var newObj = [];
     for (var i = 0; i < keys.length; i++) {
-      if (obj["2015"][keys[i]] === undefined){
+      if (obj["2016"][keys[i]] === undefined){
         newObj.push({
           name: keys[i],
           content: 0
@@ -174,10 +174,12 @@ validate();
       else {
         newObj.push({
           name: keys[i],
-          content: obj["2015"][keys[i]]
+          content: obj["2016"][keys[i]]
       });
     }
   }
+
+  // console.log(newObj)
     newObj.sort(function(a, b) {
       if (a.content.c < b.content.c) return -1;
       if (a.content.c > b.content.c) return 1;
@@ -191,7 +193,7 @@ validate();
     var keys = obj["meta"]["title"];
     var newObj = [];
     for (var i = 0; i < keys.length; i++){
-      if (obj["2015"][keys[i]] === undefined){
+      if (obj["2016"][keys[i]] === undefined){
         newObj.push({
           name: keys[i],
           content: 0
@@ -200,7 +202,7 @@ validate();
       else {
         newObj.push({
           name: keys[i],
-          content: obj["2015"][keys[i]]
+          content: obj["2016"][keys[i]]
       });
     }
   }
@@ -235,7 +237,7 @@ validate();
     var keys = obj["meta"]["title"];
     var newObj = [];
     for (var i = 0; i < keys.length; i++) {
-      if (obj["2015"][keys[i]] === undefined){
+      if (obj["2016"][keys[i]] === undefined){
         newObj.push({
           name: keys[i],
           content: 0
@@ -244,7 +246,7 @@ validate();
       else {
         newObj.push({
           name: keys[i],
-          content: obj["2015"][keys[i]]
+          content: obj["2016"][keys[i]]
       });
     }
   }
