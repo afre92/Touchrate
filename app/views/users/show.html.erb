@@ -103,8 +103,8 @@
         </td>
         <td class="right-margin bottom">
           <ul class="list">
-            <li><%= image_tag("house.png")%></li>
-            <li class="first results"><p class="results3"><%= maxStore("storeName", user.api_key, user.app_id) %></p><p class="top-description">store leading in <br>program Engagements</p></li>
+            <li><%= image_tag("topstore.png")%></li>
+            <li class="first results"><p class="results3"><%= maxStore("storeName", user.api_key, user.app_id) %></p><p class="top-description">store leading in <%= user.name.upcase %> <br>program engagements</p></li>
           </ul>
         </td>
       </tr>
@@ -127,18 +127,18 @@
         <td class="left-margin">
           <ul class="list">
             <li><%= image_tag("calendar.png")%></li>
-            <li class="second results"><p class="results4 md"><%= popularDay(user.api_key, user.app_id) %></p><p class="mid-description">Most popular day <br> for Engagements</p></li>
+            <li class="second results"><p class="results4 md"><%= popularDay(user.api_key, user.app_id) %></p><p class="mid-description">most popular day <br> for engagements</p></li>
         </td>
         <td>
           <ul class="list">
             <li><%= image_tag("time.png")%></li>
-            <li class="second results" ><p class="results5 md"><%= sessionsTime(user.api_key, user.app_id)%> Minutes</p><p class="mid-description">Average time spent<br> on application</li>
+            <li class="second results" ><p class="results5 md"><%= sessionsTime(user.api_key, user.app_id)%> minutes</p><p class="mid-description">average time spent<br> on application</li>
           </ul>
         </td>
         <td class="right-margin">
           <ul class="list">
           <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("phone", user.api_key, user.app_id) %></p><p class="mid-description">Text messages</p></li>
-          <li><%= image_tag("businessmen22.png", :class => 'comm')%></li>
+          <li><%= image_tag("pc.png", :class => 'comm')%></li>
           <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("email", user.api_key, user.app_id) %></p><p class="mid-description">Emails</p></li>
         </ul>
         </td>
