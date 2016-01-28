@@ -91,19 +91,19 @@
       <tr>
         <td class="left-margin bottom">
           <ul class="list ">
-            <li><%= image_tag("building.png")%></li>
+            <li><%= image_tag("house.png")%></li>
             <li class="first results"><p class="results1"><%= numofStores(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">store(s) actively <br>participating in <br> this <%= user.name.upcase %>  program</li>
           </ul>
         </td>
         <td>
           <ul class="list">
-            <li><%= image_tag("group.png") %></li>
+            <li><%= image_tag("group.png", :class => 'tp')%></li>
             <li class="first results"><p class="results2"><%= totalSessions(user.api_key, user.app_id) %></p><p class="top-description" style="margin-top: 5px;">shoppers showed <br> interest in viewing the <br> <%= user.name.upcase %> assortment</li>
           </ul>
         </td>
         <td class="right-margin bottom">
           <ul class="list">
-            <li><%= image_tag("topstore.png")%></li>
+            <li><%= image_tag("topstore.png", :class => 'tp')%></li>
             <li class="first results"><p class="results3"><%= maxStore("storeName", user.api_key, user.app_id) %></p><p class="top-description">store leading in <%= user.name.upcase %> <br>program engagements</p></li>
           </ul>
         </td>
@@ -126,7 +126,7 @@
       <tr  class="center" >
         <td class="left-margin">
           <ul class="list">
-            <li><%= image_tag("calendar.png")%></li>
+            <li><img src="/assets/calendar.png" alt="calendar"  </li>
             <li class="second results"><p class="results4 md"><%= popularDay(user.api_key, user.app_id) %></p><p class="mid-description">most popular day <br> for engagements</p></li>
         </td>
         <td>
@@ -138,7 +138,7 @@
         <td class="right-margin">
           <ul class="list">
           <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("phone", user.api_key, user.app_id) %></p><p class="mid-description">Text messages</p></li>
-          <li><%= image_tag("pc.png", :class => 'comm')%></li>
+          <li><img src="/assets/pc.png" alt="pc"  class="tp"></li>
           <li style="text-align:center; font-size: 25px;" class="second results"><p class="results6"><%= communication("email", user.api_key, user.app_id) %></p><p class="mid-description">Emails</p></li>
         </ul>
         </td>
