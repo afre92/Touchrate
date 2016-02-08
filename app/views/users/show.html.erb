@@ -184,8 +184,38 @@
         </td>
       </tr>
     </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>Time Stamp</th>
+<!-- 
+          <th colspan="1"></th> -->
+        </tr>
+      </thead>
+      <tbody>
+      <% reports(user.api_key, user.app_id, user.app_key).each do |r| %>
+          <tr>
+            <td><%= r["name"] %></td>
+            <td><%= r["cty"] %></td>
+            <td><% r["sessions"].each do |s| %>
+              <%= s["ts"] %>
+              <% end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+
+
+
+
     <!-- <div>  </div> -->
        <% end %> <!-- end of  users.each -->
+
+
 
     <!-- <button class="button" id="7days" data-localize="commom.7days">7 days</buttom> -->
 <!-- <img src="/assets/house34.svg" class="casa" alt= "pic" /> -->

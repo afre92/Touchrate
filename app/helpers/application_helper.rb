@@ -4,6 +4,7 @@ module ApplicationHelper
     require "json"
     require "date"
     require 'jsonpath'
+    require 'digest/sha1'
 
 
   def milToDate(mil)
@@ -11,6 +12,40 @@ module ApplicationHelper
     d.strftime("%m-%d-%Y")
   end
 
+  def reports(api_key, app_id, app_key)
+    var = nil
+    id = nil
+    name = nil
+    sessions = nil
+    arr = []
+    uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    resp = http.request(request)
+    results = JSON.parse(resp.body)
+    results["aaData"].each do |n|
+      id = n["_id"]
+      name = n["name"][6, 15]
+      uid = Digest::SHA1.hexdigest app_key+name
+      uri1 = URI.parse('https://touch-rate.com/o?method=user_details&uid='+uid+'&api_key='+api_key+'&app_id='+app_id)
+      https = Net::HTTP.new(uri1.host, uri1.port)
+      https.use_ssl = true
+      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request1 = Net::HTTP::Get.new(uri1.request_uri)
+      resp1 = https.request(request1)
+      sessions = JSON.parse(resp1.body)
+      arr.push(sessions)
+    end
+
+    return arr
+    # results1.each do |c|
+    #  return c
+    # end
+
+    # return var2
+  end
 
 
 
