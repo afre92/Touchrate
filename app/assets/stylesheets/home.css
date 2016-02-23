@@ -285,3 +285,8 @@ div.mainTable {
   height: 80px;
 
 }
+
+
+.each do |s| %>
+  <%= s["ts"] %>
+  <% end %></td>

@@ -10,6 +10,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.where(app_id: params[:app_id])
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { render text: @users.to_csv}
   end
 
 

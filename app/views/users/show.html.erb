@@ -185,34 +185,77 @@
       </tr>
     </table>
 
-    <table>
+    <table id="reports">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Store Number</th>
           <th>City</th>
-          <th>Time Stamp</th>
-<!-- 
-          <th colspan="1"></th> -->
+          <th>Timestamp</th>
+          <th>Duration in seconds</th>
         </tr>
       </thead>
       <tbody>
-      <% reports(user.api_key, user.app_id, user.app_key).each do |r| %>
-          <tr>
+      <% reportsEng(user.api_key, user.app_id, user.app_key).each do |r| %>
+          <tr style="text-align: center;">
             <td><%= r["name"] %></td>
-            <td><%= r["cty"] %></td>
-            <td><% r["sessions"].each do |s| %>
-              <%= s["ts"] %>
-              <% end %></td>
+            <td><%= r["city"] %></td>
+            <td><%= milToDateAndTime(r["ts"]) %></td>
+            <td><%= r["sd"] %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
+<!-- <button id="hello">Click me</button> -->
+<a href="#" id="test" onclick="javascript:fnExcelReport();">download</a>
+<p>
 
+</p>
 
-
-
+<table id="reports2">
+  <thead>
+    <tr>
+      <th>Store Number</th>
+      <th>Timestamp</th>
+      <th>Category name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% reportsCat(user.api_key, user.app_id, user.app_key).each do |r| %>
+      <tr style="text-align: center;">
+        <td><%= r["name"] %></td>
+        <td><%= milToDateAndTime(r["ts"]) %></td>
+        <td><%= r["sg"]["title"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<a href="#" id="test2" onClick="javascript:fnExcelReport2();">download</a>
     <!-- <div>  </div> -->
+<p>
+
+</p>
+<table id="reports3">
+  <thead>
+    <tr>
+      <th>Store Number</th>
+      <th>Timestamp</th>
+      <th>Email</th>
+      <th>Product name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% reports(user.api_key, user.app_id, user.app_key).each do |r| %>
+  <tr style="text-align: center;">
+    <td><%= r["name"] %></td>
+    <td><%= milToDateAndTime(r["ts"]) %></td>
+    <td><%= r["sg"]["title"] %></td>
+    <td><%= r["sg"]["product_name"] %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<a href="#" id="test3" onClick="javascript:fnExcelReport3();">download</a>
        <% end %> <!-- end of  users.each -->
 
 

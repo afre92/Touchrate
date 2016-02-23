@@ -7,16 +7,22 @@ module ApplicationHelper
     require 'digest/sha1'
 
 
+    def milToDateAndTime(mil)
+      d = Time.strptime(mil.to_s, '%Q')
+      d.strftime("%m-%d-%Y %H:%M:%S")
+    end
+
+
   def milToDate(mil)
     d = Time.strptime(mil.to_s, '%Q')
     d.strftime("%m-%d-%Y")
   end
 
-  def reports(api_key, app_id, app_key)
+  def reportsCat(api_key, app_id, app_key)
     var = nil
     id = nil
     name = nil
-    sessions = nil
+    events = nil
     arr = []
     uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id)
     http = Net::HTTP.new(uri.host, uri.port)
@@ -35,29 +41,108 @@ module ApplicationHelper
       https.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request1 = Net::HTTP::Get.new(uri1.request_uri)
       resp1 = https.request(request1)
-      sessions = JSON.parse(resp1.body)
-      arr.push(sessions)
+      events = JSON.parse(resp1.body)["events"].each do |c|
+      if c["ts"] >= getDateRange('from').to_i && c["ts"] < getDateRange('to').to_i
+        if c["key"] == "Categories"
+          c.merge!("name" => name)
+          arr.push(c)
+        end
+
+        end
+      end
     end
-
     return arr
-    # results1.each do |c|
-    #  return c
-    # end
-
-    # return var2
   end
 
-
-
-  def numofStores(api_key, app_id)
-    uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id+'&period=['+getDateRange('from')+','+getDateRange('to')+']')
+  def reportsEng(api_key, app_id, app_key)
+    var = nil
+    id = nil
+    name = nil
+    sessions = nil
+    city = nil
+    arr = []
+    arr2 =[]
+    uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     request = Net::HTTP::Get.new(uri.request_uri)
     resp = http.request(request)
     results = JSON.parse(resp.body)
-    results["aaData"].length
+    results["aaData"].each do |n|
+      id = n["_id"]
+      city = n["cty"]
+      name = n["name"][6, 15]
+      uid = Digest::SHA1.hexdigest app_key+name
+      uri1 = URI.parse('https://touch-rate.com/o?method=user_details&uid='+uid+'&api_key='+api_key+'&app_id='+app_id)
+      https = Net::HTTP.new(uri1.host, uri1.port)
+      https.use_ssl = true
+      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request1 = Net::HTTP::Get.new(uri1.request_uri)
+      resp1 = https.request(request1)
+      sessions = JSON.parse(resp1.body)["sessions"].each do |c|
+        if c["ts"] >= getDateRange('from').to_i && c["ts"] < getDateRange('to').to_i
+          c.merge!("name" => name)
+          c.merge!("city" => city)
+          arr.push(c)
+        else
+          arr.delete(c)
+        end
+      end
+    end
+    return arr
+  end
+
+  def reports(api_key, app_id, app_key)
+    var = nil
+    id = nil
+    name = nil
+    events = nil
+    arr = []
+    uri = URI.parse('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    resp = http.request(request)
+    results = JSON.parse(resp.body)
+    results["aaData"].each do |n|
+      id = n["_id"]
+      city = n["cty"]
+      name = n["name"][6, 15]
+      uid = Digest::SHA1.hexdigest app_key+name
+      uri1 = URI.parse('https://touch-rate.com/o?method=user_details&uid='+uid+'&api_key='+api_key+'&app_id='+app_id)
+      https = Net::HTTP.new(uri1.host, uri1.port)
+      https.use_ssl = true
+      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request1 = Net::HTTP::Get.new(uri1.request_uri)
+      resp1 = https.request(request1)
+      sessions = JSON.parse(resp1.body)["events"].each do |c|
+      if c["ts"] >= getDateRange('from').to_i && c["ts"] < getDateRange('to').to_i
+        if c["key"] == "Contact Info"
+        c.merge!("name" => name)
+        c.merge!("city" => city)
+        arr.push(c)
+      end
+      end
+      end
+    end
+    return arr
+  end
+
+
+  def sslVal(link)
+    uri = URI.parse(link)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    resp = http.request(request)
+    results = JSON.parse(resp.body)
+  end
+
+  def numofStores(api_key, app_id)
+    sslVal('https://touch-rate.com/o?method=user_details&api_key='+api_key+'&app_id='+app_id+'&period=['+getDateRange('from')+','+getDateRange('to')+']')["aaData"].length
   end
 
    def sessionsTime(api_key, app_id)
@@ -344,3 +429,14 @@ module ApplicationHelper
         end
 
 end
+# if c["ts"] >= 1454497202900 && c["ts"] < 1455102002900
+#   arr.push(c["ts"])
+# else
+#
+# end
+
+# if a["ts"] >= getDateRange('from').to_i && a["ts"] < getDateRange('to').to_i
+#   arr.push(a)
+# else
+#   arr.delete(a)
+# end
